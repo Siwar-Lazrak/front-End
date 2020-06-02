@@ -39,6 +39,7 @@
         <div class="ant-card-head-title">
             <font style="vertical-align: inherit;">
                 <font style="vertical-align: inherit; padding-left: 15px; text-decoration: solid;">
+
                     <nz-divider nzText="Liste Module" nzOrientation="left">Liste Module</nz-divider>
                 </font>
             </font>
@@ -99,18 +100,21 @@
 </ng-template>
 <ng-template #tplContent>
     <form nz-form (ngSubmit)="onSubmit()" name="form">
-        <nz-form-item>
-            <nz-form-label [nzSpan]="6" nzFor="nom">Nom module</nz-form-label>
-            <nz-form-control [nzSpan]="14">
-                <input nz-input name="nom" type="nom" id="nom" [(ngModel)]="modules.nom">
-            </nz-form-control>
-        </nz-form-item>
-        <nz-form-item>
-            <nz-form-label [nzSpan]="6" nzFor="description">Description</nz-form-label>
-            <nz-form-control [nzSpan]="14">
-                <input nz-input name="description" type="description" id="description" [(ngModel)]="modules.description">
-            </nz-form-control>
-        </nz-form-item>
+        <article nz-typography>
+            <nz-form-item>
+                <nz-form-label [nzSpan]="6" nzFor="nom"><a>Nom module</a></nz-form-label>
+                <nz-form-control [nzSpan]="14">
+                    <input nz-input name="nom" type="nom" id="nom" placeholder="Nom module" [(ngModel)]="modules.nom">
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSpan]="6" nzFor="description"><a>Description</a></nz-form-label>
+                <nz-form-control [nzSpan]="14">
+                    <textarea nz-input placeholder="Description module" name="description" type="description" id="description" [(ngModel)]="modules.description" [nzAutosize]="{ minRows: 3, maxRows: 5 }"></textarea>
+
+                </nz-form-control>
+            </nz-form-item>
+        </article>
     </form>
 </ng-template>
 <ng-template #tplFooter>
@@ -129,18 +133,20 @@
     </ng-template>
 
     <form nz-form #modalContent>
-        <nz-form-item>
-            <nz-form-label [nzSpan]="6" nzFor="nom">Nom module</nz-form-label>
-            <nz-form-control [nzSpan]="14">
-                <input nz-input name="nom" type="nom" id="nom" [(ngModel)]="mymodule.nom">
-            </nz-form-control>
-        </nz-form-item>
-        <nz-form-item>
-            <nz-form-label [nzSpan]="6" nzFor="description">Description</nz-form-label>
-            <nz-form-control [nzSpan]="14">
-                <input nz-input name="description" type="description" id="description" [(ngModel)]="mymodule.description">
-            </nz-form-control>
-        </nz-form-item>
+        <article nz-typography>
+            <nz-form-item>
+                <nz-form-label [nzSpan]="6" nzFor="nom"><a>Nom module</a></nz-form-label>
+                <nz-form-control [nzSpan]="14">
+                    <input nz-input name="nom" type="nom" id="nom" placeholder="Update name of module" [(ngModel)]="mymodule.nom">
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSpan]="6" nzFor="description"><a>Description</a></nz-form-label>
+                <nz-form-control [nzSpan]="14">
+                    <textarea nz-input placeholder="Update description" name="description" type="description" id="description" [(ngModel)]="mymodule.description" [nzAutosize]="{ minRows: 3, maxRows: 5 }"></textarea>
+                </nz-form-control>
+            </nz-form-item>
+        </article>
     </form>
     <ng-template #modalFooter>
         <button nz-button nzType="default" (click)="handleCancel()">Cancel</button>

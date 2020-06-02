@@ -6,32 +6,33 @@
     </nz-steps>
     <div class="steps-content" *ngIf="this.index == 'First-content'" style="background-color: white;">
         <form nz-form>
-            <nz-form-item>
-                <nz-form-label [nzSpan]="6" nzFor="namerapport"><b style="color: dodgerblue;">Name Report</b></nz-form-label>
-                <nz-form-control [nzSpan]="14">
-                    <input nz-input name="namerapport" type="text" id="namerapport" placeholder="Name Report">
-                </nz-form-control>
-            </nz-form-item>
-            <nz-form-item>
-                <nz-form-label [nzSpan]="6" nzFor="title"><b style="color: dodgerblue;">Chart Title</b></nz-form-label>
-                <nz-form-control [nzSpan]="14">
-                    <input nz-input name="title" type="text" id="title" placeholder="Charte Title">
-                </nz-form-control>
-            </nz-form-item>
-            <nz-form-item>
-                <nz-form-label [nzSpan]="6" nzFor="chartType"><b style="color: dodgerblue;">Chart Type</b></nz-form-label>
-                <nz-form-control [nzSpan]="14">
-                    <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select Chart Type" [(ngModel)]="selectedOS">
-                        <nz-option nzCustomContent nzLabel="area-chart" nzValue="area-chart"><i nz-icon nzType="area-chart" nzTheme="outline"></i> Area-chart</nz-option>
-                        <nz-option nzCustomContent nzLabel="Mpie-chartac" nzValue="pie-chart"><i nz-icon nzType="pie-chart" nzTheme="outline"></i> Pie-chart</nz-option>
-                        <nz-option nzCustomContent nzLabel="bar-chart" nzValue="bar-chart"><i nz-icon nzType="bar-chart" nzTheme="outline"></i> Bar-chart</nz-option>
-                        <nz-option nzCustomContent nzLabel="line-chart" nzValue="line-chart"><i nz-icon nzType="line-chart" nzTheme="outline"></i> Line-chart</nz-option>
-                        <nz-option nzCustomContent nzLabel="radar-chart" nzValue="radar-chart"><i nz-icon nzType="radar-chart" nzTheme="outline"></i> Radar-chart</nz-option>
-                        <nz-option nzCustomContent nzLabel="dot-chart" nzValue="dot-chart"><i nz-icon nzType="dot-chart" nzTheme="outline"></i> Scatter plot</nz-option>
-                    </nz-select>
-                </nz-form-control>
-            </nz-form-item>
-
+            <article nz-typography>
+                <nz-form-item>
+                    <nz-form-label [nzSpan]="6" nzFor="namerapport"><a>Name Report</a></nz-form-label>
+                    <nz-form-control [nzSpan]="14">
+                        <input nz-input name="namerapport" type="text" id="namerapport" placeholder="Name Report">
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                    <nz-form-label [nzSpan]="6" nzFor="title"><a>Chart Title</a></nz-form-label>
+                    <nz-form-control [nzSpan]="14">
+                        <input nz-input name="title" type="text" id="title" placeholder="Charte Title">
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                    <nz-form-label [nzSpan]="6" nzFor="chartType"><a>Chart Type</a></nz-form-label>
+                    <nz-form-control [nzSpan]="14">
+                        <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select Chart Type" [(ngModel)]="selectedOS">
+                            <nz-option nzCustomContent nzLabel="area-chart" nzValue="area-chart"><i nz-icon nzType="area-chart" nzTheme="outline"></i> Area-chart</nz-option>
+                            <nz-option nzCustomContent nzLabel="Mpie-chartac" nzValue="pie-chart"><i nz-icon nzType="pie-chart" nzTheme="outline"></i> Pie-chart</nz-option>
+                            <nz-option nzCustomContent nzLabel="bar-chart" nzValue="bar-chart"><i nz-icon nzType="bar-chart" nzTheme="outline"></i> Bar-chart</nz-option>
+                            <nz-option nzCustomContent nzLabel="line-chart" nzValue="line-chart"><i nz-icon nzType="line-chart" nzTheme="outline"></i> Line-chart</nz-option>
+                            <nz-option nzCustomContent nzLabel="radar-chart" nzValue="radar-chart"><i nz-icon nzType="radar-chart" nzTheme="outline"></i> Radar-chart</nz-option>
+                            <nz-option nzCustomContent nzLabel="dot-chart" nzValue="dot-chart"><i nz-icon nzType="dot-chart" nzTheme="outline"></i> Scatter plot</nz-option>
+                        </nz-select>
+                    </nz-form-control>
+                </nz-form-item>
+            </article>
         </form>
     </div>
 

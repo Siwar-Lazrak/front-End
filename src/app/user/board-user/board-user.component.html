@@ -1,7 +1,11 @@
 <nz-layout>
     <nz-header>
-        <button class="logo" (click)="open()"> 
-        </button>
+        <div class="logo">
+            <a (click)="open()">
+                <img alt="logo" src="assets\logoelite.jpg" style="width: 63px; border-radius: 50px; margin-left: 10px; margin-top: 5px;">
+            </a>
+        </div>
+
         <nz-drawer [nzClosable]="false" [nzVisible]="visible" nzPlacement="right" nzType="link" nzTitle="Elite Business & Consulting" (nzOnClose)="close()">
             <p><b style="color: rgb(105, 170, 245);">Elite Business & Consulting </b> <br> a été fondée en 2011, c’est une société à responsabilité limitée spécialisée dans le domaine de la télécommunication, comptant cinq collaborateurs bénéficiant d’une
                 expérience dans les opérateurs de télécommunications. Ses experts et consultants cultivent une connaissance pour répondre à l’ensemble des enjeux du Revenue Assurance Fraude chez les opérateurs télécom. <br><b style="color: rgb(105, 170, 245);">Elite Business &  Consulting </b>développe
@@ -44,8 +48,8 @@
                                 <div class="avatarStyle">
                                     <ul class="demo">
                                         <li style="padding-left: 18%"><img src="assets\siwar.jpg" alt="Avatar" class="avatar" style="width: 100px; height: 100px; "></li>
-                                        <li style="padding-left: 28%"><span nz-text><mark> <a nz-title>{{username}}</a></mark></span></li>
-                                        <li style="padding-left: 4%"><span nz-text nzType="secondary">{{email}}</span></li>
+                                        <li style="padding-left: 48%"><span nz-text><mark> <a nz-title>{{username}}</a></mark></span></li>
+                                        <li style="padding-left: 29%"><span nz-text nzType="secondary">{{email}}</span></li>
                                         <nz-divider></nz-divider>
                                         <li><label nz-radio-button nzValue="large" routerLink="profile">
                                 <i nz-icon nzType="solution"></i>

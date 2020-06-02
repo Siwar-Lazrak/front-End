@@ -64,42 +64,38 @@
             </nz-dropdown-menu>
     </nz-table>
     <nz-pagination [nzPageIndex]="1" [nzTotal]="50" style="padding-left: 650px;"></nz-pagination>
-
 </nz-content>
-
 <ng-template #tplTitle>
     <div class="alert alert-info" role="alert">
         New Sous Module
     </div>
-
-
 </ng-template>
 <ng-template #tplContent>
     <form nz-form (ngSubmit)="onSubmit()">
-        <nz-form-item>
-            <nz-form-label [nzSpan]="6" nzFor="nomSousModule">Nom Sous Module</nz-form-label>
-            <nz-form-control [nzSpan]="14">
-                <input nz-input name="nomSousModule" type="text" id="nomSousModule" [(ngModel)]="sousmodul.nomSousModule">
-            </nz-form-control>
-        </nz-form-item>
-
-        <nz-form-item>
-            <nz-form-label [nzSpan]="6" nzFor="descriptionSousModule">Description</nz-form-label>
-            <nz-form-control [nzSpan]="14">
-                <input nz-input name="descriptionSousModule" type="text" id="descriptionSousModule" [(ngModel)]="sousmodul.descriptionSousModule">
-            </nz-form-control>
-        </nz-form-item>
-
-        <nz-form-item>
-            <nz-form-label [nzSpan]="6" nzFor="module">Module</nz-form-label>
-            <nz-form-control [nzSpan]="14">
-                <select [(ngModel)]="modulee" name="modulee">
+        <article nz-typography>
+            <nz-form-item>
+                <nz-form-label [nzSpan]="6" nzFor="nomSousModule"><a>Nom Sous Module</a></nz-form-label>
+                <nz-form-control [nzSpan]="14">
+                    <input nz-input name="nomSousModule" type="text" id="nomSousModule" placeholder="Name of Sous-module" [(ngModel)]="sousmodul.nomSousModule">
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSpan]="6" nzFor="descriptionSousModule"><a>Description</a></nz-form-label>
+                <nz-form-control [nzSpan]="14">
+                    <textarea nz-input placeholder="Description of Sous-module" name="descriptionSousModule" type="description" id="descriptionSousModule" [(ngModel)]="sousmodul.descriptionSousModule" [nzAutosize]="{ minRows: 3, maxRows: 5 }"></textarea>
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSpan]="6" nzFor="module"><a>Module</a></nz-form-label>
+                <nz-form-control [nzSpan]="14">
+                    <select [(ngModel)]="modulee" name="modulee">
                         <option *ngFor="let mymodule of module"  id="idModule" value="{{mymodule.idModule}}" >
                             {{ mymodule.nom }} 
                         </option>
                       </select>
-            </nz-form-control>
-        </nz-form-item>
+                </nz-form-control>
+            </nz-form-item>
+        </article>
     </form>
 </ng-template>
 <ng-template #tplFooter>
@@ -114,23 +110,21 @@
     <ng-template #modalTitle>
         Update Sous Module
     </ng-template>
-
     <form nz-form #modalContent>
-        <nz-form-item>
-            <nz-form-label [nzSpan]="6" nzFor="nomSousModule">Nom Sous Module</nz-form-label>
-            <nz-form-control [nzSpan]="14">
-                <input nz-input name="nomSousModule" type="text" id="nomSousModule" [(ngModel)]="mysousmodule.nomSousModule">
-            </nz-form-control>
-        </nz-form-item>
-        <nz-form-item>
-            <nz-form-label [nzSpan]="6" nzFor="descriptionSousModule">Description</nz-form-label>
-            <nz-form-control [nzSpan]="14">
-                <input nz-input name="descriptionSousModule" type="text" id="descriptionSousModule" [(ngModel)]="mysousmodule.descriptionSousModule">
-            </nz-form-control>
-
-
-        </nz-form-item>
-
+        <article nz-typography>
+            <nz-form-item>
+                <nz-form-label [nzSpan]="6" nzFor="nomSousModule"><a>Nom Sous Module</a></nz-form-label>
+                <nz-form-control [nzSpan]="14">
+                    <input nz-input name="nomSousModule" type="text" id="nomSousModule" [(ngModel)]="mysousmodule.nomSousModule">
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSpan]="6" nzFor="descriptionSousModule"><a>Description</a></nz-form-label>
+                <nz-form-control [nzSpan]="14">
+                    <textarea nz-input placeholder="Description of Sous-module" name="descriptionSousModule" type="description" id="descriptionSousModule" [(ngModel)]="mysousmodule.descriptionSousModule" [nzAutosize]="{ minRows: 3, maxRows: 5 }"></textarea>
+                </nz-form-control>
+            </nz-form-item>
+        </article>
     </form>
 
     <ng-template #modalFooter>

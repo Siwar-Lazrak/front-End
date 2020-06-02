@@ -1,9 +1,10 @@
 <nz-layout>
     <nz-header>
-        <button class="logo" (click)="open()">
-           
-            
-        </button>
+        <div class="logo">
+            <a (click)="open()">
+                <img alt="logo" src="assets\logoelite.jpg" style="width: 63px; border-radius: 50px; margin-left: 10px; margin-top: 5px;">
+            </a>
+        </div>
         <nz-drawer [nzClosable]="false" [nzVisible]="visible" nzPlacement="right" nzType="link" nzTitle="Elite Business & Consulting" (nzOnClose)="close()">
             <p><b style="color: rgb(105, 170, 245);">Elite Business & Consulting </b> <br> a été fondée en 2011, c’est une société à responsabilité limitée spécialisée dans le domaine de la télécommunication, comptant cinq collaborateurs bénéficiant d’une
                 expérience dans les opérateurs de télécommunications. Ses experts et consultants cultivent une connaissance pour répondre à l’ensemble des enjeux du Revenue Assurance Fraude chez les opérateurs télécom. <br><b style="color: rgb(105, 170, 245);">Elite Business &  Consulting </b>développe
