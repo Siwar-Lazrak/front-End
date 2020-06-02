@@ -1,0 +1,178 @@
+<nz-layout>
+    <nz-header>
+        <button class="logo" (click)="open()">
+           
+            
+        </button>
+        <nz-drawer [nzClosable]="false" [nzVisible]="visible" nzPlacement="right" nzType="link" nzTitle="Elite Business & Consulting" (nzOnClose)="close()">
+            <p><b style="color: rgb(105, 170, 245);">Elite Business & Consulting </b> <br> a été fondée en 2011, c’est une société à responsabilité limitée spécialisée dans le domaine de la télécommunication, comptant cinq collaborateurs bénéficiant d’une
+                expérience dans les opérateurs de télécommunications. Ses experts et consultants cultivent une connaissance pour répondre à l’ensemble des enjeux du Revenue Assurance Fraude chez les opérateurs télécom. <br><b style="color: rgb(105, 170, 245);">Elite Business &  Consulting </b>développe
+                un large domaine d’expertise portant sur la mise en place d’une cellule de Revenue Assurance, Conseil, Outsourcing et Système de revenue Assurance, Fraude et Reporting.
+            </p>
+        </nz-drawer>
+
+        <ul nz-menu nzTheme="light" nzMode="horizontal" class="header-menu" style="background-color: dodgerblue;">
+            <div nz-row style="margin-bottom: 50px;">
+                <div nz-col [nzSpan]="18" [nzPush]="6" style="display: inline-block;">
+                    <div nz-row nzType="flex" nzJustify="end">
+                        <div nz-col [nzSpan]="4" style="padding-left: 1%;">
+                            <nz-time-picker [(ngModel)]="time"></nz-time-picker>
+                        </div>
+                        <div nz-col>
+                            <ng-template #template let-notification>
+                                <div class="ant-notification-notice-content">
+                                    <div>
+                                        <div class="ant-notification-notice-message">Notification Title</div>
+                                        <div class="ant-notification-notice-description">
+                                            A function will be be called after the notification is closed (automatically after the "duration" time of manually).
+                                        </div>
+                                        <span class="ant-notification-notice-btn">
+                                  <button nz-button nzType="primary" nzSize="small" (click)="notification.close()">
+                                    <span>Confirm</span>
+                                        </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </ng-template>
+                            <nz-badge nzDot (click)="createBasicNotification(template)">
+                                <i nz-icon nzType="alert" nzTheme="outline" style="font-size: 20px;"></i>
+                            </nz-badge>
+                        </div>
+                        <div nz-col [nzSpan]="2" *ngIf="isLoggedIn">
+                            <nz-button-group nzSpan="4" nzPlacement="bottomRight" nz-popover nzPopoverTitle="" [nzPopoverContent]="contentTemplate" nzPopoverPlacement="bottomRight">
+                                <img src="assets\siwar.jpg" alt="Avatar" class="avatar">
+                            </nz-button-group>
+                            <ng-template #contentTemplate>
+                                <div class="avatarStyle">
+                                    <ul class="demo">
+                                        <li style="padding-left: 18%"><img src="assets\siwar.jpg" alt="Avatar" class="avatar" style="width: 100px; height: 100px; "></li>
+                                        <li style="padding-left: 28%"><span nz-text><mark> <a nz-title>{{username}}</a></mark></span></li>
+                                        <li style="padding-left: 4%"><span nz-text nzType="secondary">{{email}}</span></li>
+                                        <nz-divider></nz-divider>
+                                        <li><label nz-radio-button nzValue="large" routerLink="profile">
+                                <i nz-icon nzType="solution"></i>
+                                Gérer votre profile</label></li>
+                                        <nz-divider></nz-divider>
+                                        <li style="padding-left: 12%"><label class="deconnexionStyle" nz-radio-button nzValue="large" nzType="primary" (click)="logout()">
+                                <i nz-icon nzType="poweroff" nzTheme="outline"></i>
+                                Déconnexion</label></li>
+                                    </ul>
+                                </div>
+                            </ng-template>
+                        </div>
+                    </div>
+                </div>
+                <div nz-col [nzSpan]="4" [nzPull]="18">
+                    <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'" (click)="isCollapsed = !isCollapsed"></i>
+                </div>
+            </div>
+        </ul>
+    </nz-header>
+    <nz-layout>
+        <nz-sider nzWidth="200px" nzTheme="light" nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
+            <ul nz-menu nzMode="inline" class="sider-menu">
+                <li nz-menu-item routerLink="home">
+                    <i nz-icon nzType="dashboard" nzTheme="outline"></i>
+                    <span>Dashboard</span>
+
+                </li>
+                <li nz-submenu nzTitle="User" nzIcon="user">
+                    <ul>
+                        <li nz-menu-item routerLink="add-users">
+                            <i nz-icon nzType="user-add" nzTheme="outline"></i>Add-User</li>
+
+                        <li nz-menu-item routerLink="access">
+                            <i nz-icon nzType="group" nzTheme="outline"></i>Access-User</li>
+                    </ul>
+                </li>
+                <li nz-menu-item routerLink="moduleadmin">
+                    <i nz-icon nzType="appstore-add" nzTheme="outline"></i>
+                    <span>Module</span>
+                </li>
+
+                <li nz-menu-item routerLink="sousmoduleAdmin">
+                    <i nz-icon nzType="cluster" nzTheme="outline"></i>
+                    <span>Sous-Module</span>
+                </li>
+                <li nz-menu-item>
+                    <i nz-icon nzType="file"></i>
+                    <span>File</span>
+                </li>
+            </ul>
+        </nz-sider>
+        <nz-layout class="inner-layout">
+            <!--  <div class="ant-pro-page-header-wrap-page-header-warp" style="background-color: white;">
+                <div class="ant-pro-grid-content">
+                    <div class="ant-page-header has-breadcrumb ant-page-header-ghost">
+                        <div class="ant-breadcrumb">
+                            <span><span class="ant-breadcrumb-link"><a href="/">Home</a></span>
+                            <span class="ant-breadcrumb-separator">/</span></span>
+                            <span><span class="ant-breadcrumb-link"><span>List</span></span>
+                            <span class="ant-breadcrumb-separator">/</span></span>
+                            <span><span class="ant-breadcrumb-link"><span>Card List</span></span>
+                            <span class="ant-breadcrumb-separator">
+                <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">/</font></font></span></span>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            <nz-content style="background-color: #f0f2f5;">
+
+                <!--   <div style="padding-bottom:10px;">
+                        <div nz-row [nzGutter]="8">
+
+                            <div nz-col [nzSpan]="8">
+                                <nz-card nzTitle="Module" routerLink="moduleadmin" [nzHoverable] [nzExtra]="extraTemplatemodule" class="cardStyle">
+                                    <nz-col [nzSpan]="12">
+                                        <nz-statistic [nzValue]="" [nzTitle]="'Active'" [nzPrefix]="prefixTplOne" [nzSuffix]="'%'" [nzValueStyle]="{ color: '#3F8600' }">
+
+                                        </nz-statistic>
+                                        <ng-template #prefixTplOne><i nz-icon nzType="arrow-up"></i></ng-template>
+                                    </nz-col>
+                                </nz-card>
+                                <ng-template #extraTemplatemodule>
+                                    <i nz-icon nzType="plus-circle" nzTheme="twotone" style="font-size: 30px; color: #08c;" routerLink="module"></i>
+                                </ng-template>
+                            </div>
+                            <div nz-col [nzSpan]="8">
+                                <nz-card nzTitle="Sous-Module" routerLink="sousmoduleAdmin" [nzExtra]="extraTemplatesousmodule" class="cardStyle">
+                                    <nz-col [nzSpan]="12">
+                                        <nz-statistic [nzValue]="" [nzTitle]="'Active'" [nzPrefix]="prefixTplOne" [nzSuffix]="'%'" [nzValueStyle]="{ color: '#3F8600' }">
+
+                                        </nz-statistic>
+                                        <ng-template #prefixTplOne><i nz-icon nzType="arrow-up"></i></ng-template>
+                                    </nz-col>
+                                </nz-card>
+
+                                <ng-template #extraTemplatesousmodule>
+                                    <i nz-icon nzType="plus-circle" nzTheme="outline" style="font-size: 30px; color: #08c;" routerLink="sous-module">
+                                    </i>
+                                </ng-template>
+                            </div>
+                            <div nz-col [nzSpan]="8">
+                                <nz-card nzTitle="Rapport" routerLink="rapport" [nzExtra]="extraTemplaterepport" class="cardStyle">
+                                    <nz-col [nzSpan]="12">
+                                        <nz-statistic [nzValue]="" [nzTitle]="'Active'" [nzPrefix]="prefixTplOne" [nzSuffix]="'%'" [nzValueStyle]="{ color: '#3F8600' }">
+
+                                        </nz-statistic>
+                                        <ng-template #prefixTplOne><i nz-icon nzType="arrow-up"></i></ng-template>
+                                    </nz-col>
+                                </nz-card>
+                                <ng-template #extraTemplaterepport>
+                                    <i nz-icon nzType="plus-circle" nzTheme="outline" style="font-size: 30px; color: #08c;" routerLink="rapport"></i>
+
+                                </ng-template>
+                            </div>
+                        </div>
+                    </div> -->
+                <div class="inner-content" style="background-color: #f0f2f5;">
+                    <router-outlet></router-outlet>
+                </div>
+            </nz-content>
+        </nz-layout>
+    </nz-layout>
+</nz-layout>
+<footer style="margin-left: 55%; padding-top: 30px;">
+    © 2020 Copyright: Elite Business.com
+</footer>

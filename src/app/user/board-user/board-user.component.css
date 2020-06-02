@@ -1,0 +1,167 @@
+.logo {
+  width: 120px;
+  height: 31px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 16px;
+  float: left;
+  text-align: justify;
+}
+.header-menu {
+  line-height: 64px;
+}
+.sider-menu {
+  height: 100%;
+  border-right: 0;
+}
+nz-breadcrumb {
+  margin: 16px 0;
+}
+nz-content {
+  background: #fff;
+  padding: 9px;
+  min-height: 280px;
+}
+.trigger {
+  font-size: 18px;
+  line-height: 64px;
+  padding: 0 24px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+.trigger:hover {
+  color: #1890ff;
+}
+nz-header {
+  background: #fff;
+  padding: 0;
+}
+nz-content {
+  margin: 0 16px;
+}
+nz-breadcrumb {
+  margin: 16px 0;
+}
+.inner-content {
+  padding: 24px;
+  background: #fff;
+  min-height: 360px;
+}
+nz-footer {
+  text-align: center;
+}
+[nz-button] {
+  margin-right: 8px;
+  margin-bottom: 12px;
+}
+nz-button-group [nz-button] {
+  margin-right: 0;
+}
+nz-badge {
+  margin-right: 20px;
+}
+nz-badge {
+  margin-right: 20px;
+}
+.numberCircle {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  padding: 8px;
+  background: #fff;
+  border: 0px #666;
+  color: #2128f5;
+  text-align: center;
+  background-color: #87cefa;
+  font: 32px Arial, sans-serif;
+}
+.img {
+  width: 10px;
+  height: 10px;
+  position: relative;
+}
+.avatar {
+  width: 40px;
+  height: 41px;
+  border-radius: 50%;
+  border-color: #08c;
+}
+nz-badge {
+  margin-right: 20px;
+}
+.head-example {
+  width: 42px;
+  height: 42px;
+  border-radius: 4px;
+  background: #eee;
+  display: inline-block;
+  vertical-align: middle;
+}
+nz-alert {
+  margin-bottom: 10px;
+  text-decoration: solid;
+}
+.title {
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.85);
+  line-height: 24px;
+  display: block;
+  margin-bottom: 16px;
+}
+.item-wrap {
+  font-size: 14px;
+  line-height: 22px;
+  margin-bottom: 7px;
+  color: rgba(0, 0, 0, 0.65);
+}
+.label {
+  margin-right: 8px;
+  display: inline-block;
+  color: rgba(0, 0, 0, 0.85);
+}
+.global-search-item {
+  display: flex;
+}
+.global-search-item-desc {
+  flex: auto;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.global-search-item-count {
+  flex: none;
+}
+button {
+  margin-right: 8px;
+  margin-bottom: 8px;
+  width: 70px;
+  text-align: center;
+  padding: 0;
+}
+img {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  width: 150px;
+  margin-left: 10px;
+}
+img:hover {
+  box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}
+.avatarStyle p {
+  padding: 5px;
+}
+ul.demo {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+nz-time-picker {
+  margin: 0 8px 12px 0;
+}
+.ant-progress {
+  margin-right: 8px;
+  margin-bottom: 8px;
+  display: inline-block;
+}
+nz-sider {
+  overflow: auto;
+}

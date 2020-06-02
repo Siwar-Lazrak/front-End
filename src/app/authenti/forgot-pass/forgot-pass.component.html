@@ -1,0 +1,27 @@
+<div class="login-x">
+    <div nz-row [nzGutter]="8">
+        <div nz-col [nzSpan]="8" style="margin-left: 350px;">
+            <nz-card nzTitle="Forgot password" class="card-form">
+                <form nz-form class="login-form" [formGroup]="validateForm" (ngSubmit)="onSubmit()" name="form">
+                    <nz-form-item>
+                        <nz-form-label [nzSpan]="6" nzFor="email">E-mail</nz-form-label>
+                        <nz-form-control [nzSpan]="14">
+                            <input nz-input formControlName="email" name="email" type="email" id="email" placeholder="Email" [(ngModel)]="form.email">
+                        </nz-form-control>
+                    </nz-form-item>
+                    <nz-form-item>
+                        <nz-form-control>
+                            <button nz-button class="login-form-button" [nzType]="'primary'">
+                                Send
+                            </button>
+                        </nz-form-control>
+                    </nz-form-item>
+
+                    <nz-alert *ngIf="isLoginFailed" nzType="success" nzShowIcon nzMessage="Request to reset password received. Check your inbox for the reset link.">
+                    </nz-alert>
+                </form>
+            </nz-card>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,140 @@
+<nz-content style="background-color: white;">
+    <div class="ant-card-head-wrapper" style="padding-left: 20px; padding-right: 20px;">
+        <div class="ant-card-head-title">
+            <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit; padding-left: 15px; text-decoration: solid;">
+                    <nz-divider nzText="Liste Sous-Module" nzOrientation="left">Liste Sous-Module</nz-divider>
+                </font>
+            </font>
+        </div>
+    </div>
+    <button nz-button nzType="dashed" (click)="createTplModal(tplTitle, tplContent, tplFooter)" style="margin-left: 22px; margin-bottom: 20px; width: 130px; background-color: dodgerblue;">
+        <i nz-icon nzType="plus-square" nzTheme="twotone"></i>
+        Add
+    </button>
+
+    <nz-table #nzTable [nzData]="mysousmodule" nzTableLayout="fixed" style="padding-left: 20px; padding-right: 20px;">
+        <thead>
+            <tr>
+                <th></th>
+                <th style="color: dodgerblue;">#</th>
+                <th nzCustomFilter style="color: dodgerblue;">
+                    Nom Sous Module
+                    <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
+                        <i nz-icon nzType="search"></i>
+                    </nz-filter-trigger>
+                </th>
+
+                <th style="color: dodgerblue;">Module</th>
+                <th style="color: dodgerblue;">Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tbody *ngFor="let access of useraccess">
+                <ng-template ngFor let-data [ngForOf]="sousModule">
+                    <tr *ngIf="access.user['id'] === this.id && access.sousmodule['idSousModule'] == data.idSousModule">
+                        <td [nzExpand]="expandSet.has(data.idSousModule)" (nzExpandChange)="onExpandChange(data.idSousModule, $event)"></td>
+
+                        <td>{{ data.idSousModule}}</td>
+                        <td>{{ data.nomSousModule}}</td>
+                        <td>{{ data.module['nom'] }}</td>
+                        <td>
+                            <a (click)="showModal()" (click)="editsousmodule(data)"> <i nz-icon nzType="edit" nzTheme="twotone"></i></a>
+                            <nz-divider nzType="vertical"></nz-divider>
+                            <a (click)="showConfirm()" (click)="deletesousmodule(data.idSousModule)"><i nz-icon nzType="delete" nzTheme="twotone"></i></a>
+
+                        </td>
+                    </tr>
+                    <tr [nzExpand]="expandSet.has(data.idSousModule)">
+                        <span>{{ data.descriptionSousModule }}</span>
+                    </tr>
+                </ng-template>
+            </tbody>
+            <nz-dropdown-menu #menu="nzDropdownMenu">
+                <div class="ant-table-filter-dropdown">
+                    <div class="search-box">
+                        <input type="text" nz-input placeholder="Search name" [(ngModel)]="searchValue" />
+                        <button nz-button nzSize="small" nzType="primary" (click)="search()" class="search-button">
+                      Search
+                    </button>
+                        <button nz-button nzSize="small" (click)="reset()">Reset</button>
+                    </div>
+                </div>
+            </nz-dropdown-menu>
+    </nz-table>
+    <nz-pagination [nzPageIndex]="1" [nzTotal]="50" style="padding-left: 650px;"></nz-pagination>
+
+</nz-content>
+
+<ng-template #tplTitle>
+    <div class="alert alert-info" role="alert">
+        New Sous Module
+    </div>
+
+
+</ng-template>
+<ng-template #tplContent>
+    <form nz-form (ngSubmit)="onSubmit()">
+        <nz-form-item>
+            <nz-form-label [nzSpan]="6" nzFor="nomSousModule">Nom Sous Module</nz-form-label>
+            <nz-form-control [nzSpan]="14">
+                <input nz-input name="nomSousModule" type="text" id="nomSousModule" [(ngModel)]="sousmodul.nomSousModule">
+            </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+            <nz-form-label [nzSpan]="6" nzFor="descriptionSousModule">Description</nz-form-label>
+            <nz-form-control [nzSpan]="14">
+                <input nz-input name="descriptionSousModule" type="text" id="descriptionSousModule" [(ngModel)]="sousmodul.descriptionSousModule">
+            </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+            <nz-form-label [nzSpan]="6" nzFor="module">Module</nz-form-label>
+            <nz-form-control [nzSpan]="14">
+                <select [(ngModel)]="modulee" name="modulee">
+                        <option *ngFor="let mymodule of module"  id="idModule" value="{{mymodule.idModule}}" >
+                            {{ mymodule.nom }} 
+                        </option>
+                      </select>
+            </nz-form-control>
+        </nz-form-item>
+    </form>
+</ng-template>
+<ng-template #tplFooter>
+    <button nz-button (click)="destroyTplModal()" [nzLoading]="tplModalButtonLoading">
+      Close after submit 
+    </button>
+</ng-template>
+
+<!--Update-->
+
+<nz-modal [(nzVisible)]="isVisible" [nzTitle]="modalTitle" [nzFooter]="modalFooter" (nzOnCancel)="handleCancel()">
+    <ng-template #modalTitle>
+        Update Sous Module
+    </ng-template>
+
+    <form nz-form #modalContent>
+        <nz-form-item>
+            <nz-form-label [nzSpan]="6" nzFor="nomSousModule">Nom Sous Module</nz-form-label>
+            <nz-form-control [nzSpan]="14">
+                <input nz-input name="nomSousModule" type="text" id="nomSousModule" [(ngModel)]="mysousmodule.nomSousModule">
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label [nzSpan]="6" nzFor="descriptionSousModule">Description</nz-form-label>
+            <nz-form-control [nzSpan]="14">
+                <input nz-input name="descriptionSousModule" type="text" id="descriptionSousModule" [(ngModel)]="mysousmodule.descriptionSousModule">
+            </nz-form-control>
+
+
+        </nz-form-item>
+
+    </form>
+
+    <ng-template #modalFooter>
+        <button nz-button nzType="default" (click)="handleCancel()">Cancel</button>
+        <button nz-button nzType="primary" (click)="updatesousModule()" (click)="handleOk()" [nzLoading]="isConfirmLoading">Submit</button>
+    </ng-template>
+</nz-modal>

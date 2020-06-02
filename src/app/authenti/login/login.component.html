@@ -1,0 +1,40 @@
+<div class="login-x">
+    <div nz-row [nzGutter]="8">
+        <div nz-col [nzSpan]="8" style="margin-left: 350px;">
+            <nz-card nzTitle="Sign In" class="card-form">
+                <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="onSubmit()" name="form">
+                    <nz-form-item>
+                        <nz-form-control nzErrorTip="Please input your username!">
+                            <nz-input-group nzPrefixIcon="user">
+                                <input type="text" nz-input formControlName="username" id="username" placeholder="Username" [(ngModel)]="form.username" />
+                            </nz-input-group>
+                        </nz-form-control>
+                    </nz-form-item>
+
+                    <nz-form-item>
+                        <nz-form-control nzErrorTip="Please input your Password!">
+
+                            <nz-input-group [nzSuffix]="suffixTemplate" nzPrefixIcon="lock">
+                                <input [type]="passwordVisible ? 'text' : 'password'" nz-input formControlName="password" id="password" placeholder="Password" [(ngModel)]="form.password" autocomplete="on" />
+                            </nz-input-group>
+                        </nz-form-control>
+                    </nz-form-item>
+                    <ng-template #suffixTemplate>
+                        <i nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'" (click)="passwordVisible = !passwordVisible"></i>
+                    </ng-template>
+
+                    <nz-form-item>
+                        <nz-form-control>
+                            <button nz-button class="login-form-button" [nzType]="'primary'">
+                                LogIn
+                            </button> Or
+                            <a routerLink="/forgotpass">Forgot password ?</a>
+                        </nz-form-control>
+                        <nz-alert nzType="error" nzMessage="Invalid Username Or Password" nzShowIcon *ngIf="isLoginFailed"></nz-alert>
+                    </nz-form-item>
+                </form>
+            </nz-card>
+        </div>
+
+    </div>
+</div>

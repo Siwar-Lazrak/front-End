@@ -1,0 +1,188 @@
+<nz-content style="background-color: white;">
+    <nz-steps [nzCurrent]="current" style="padding-left: 70px;">
+        <nz-step nzTitle="Waiting" style="padding-left: 70px;"></nz-step>
+        <nz-step nzTitle="In Progress"></nz-step>
+        <nz-step nzTitle="Finished" style="padding-right: 70px;"></nz-step>
+    </nz-steps>
+    <div class="steps-content" *ngIf="this.index == 'First-content'" style="background-color: white;">
+        <form nz-form>
+            <nz-form-item>
+                <nz-form-label [nzSpan]="6" nzFor="namerapport"><b style="color: dodgerblue;">Name Report</b></nz-form-label>
+                <nz-form-control [nzSpan]="14">
+                    <input nz-input name="namerapport" type="text" id="namerapport" placeholder="Name Report">
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSpan]="6" nzFor="title"><b style="color: dodgerblue;">Chart Title</b></nz-form-label>
+                <nz-form-control [nzSpan]="14">
+                    <input nz-input name="title" type="text" id="title" placeholder="Charte Title">
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSpan]="6" nzFor="chartType"><b style="color: dodgerblue;">Chart Type</b></nz-form-label>
+                <nz-form-control [nzSpan]="14">
+                    <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select Chart Type" [(ngModel)]="selectedOS">
+                        <nz-option nzCustomContent nzLabel="area-chart" nzValue="area-chart"><i nz-icon nzType="area-chart" nzTheme="outline"></i> Area-chart</nz-option>
+                        <nz-option nzCustomContent nzLabel="Mpie-chartac" nzValue="pie-chart"><i nz-icon nzType="pie-chart" nzTheme="outline"></i> Pie-chart</nz-option>
+                        <nz-option nzCustomContent nzLabel="bar-chart" nzValue="bar-chart"><i nz-icon nzType="bar-chart" nzTheme="outline"></i> Bar-chart</nz-option>
+                        <nz-option nzCustomContent nzLabel="line-chart" nzValue="line-chart"><i nz-icon nzType="line-chart" nzTheme="outline"></i> Line-chart</nz-option>
+                        <nz-option nzCustomContent nzLabel="radar-chart" nzValue="radar-chart"><i nz-icon nzType="radar-chart" nzTheme="outline"></i> Radar-chart</nz-option>
+                        <nz-option nzCustomContent nzLabel="dot-chart" nzValue="dot-chart"><i nz-icon nzType="dot-chart" nzTheme="outline"></i> Scatter plot</nz-option>
+                    </nz-select>
+                </nz-form-control>
+            </nz-form-item>
+
+        </form>
+    </div>
+
+    <div class="steps-content" *ngIf="this.index == 'Second-content'" style="background-color: white;">
+        <nz-table #nzTable [nzData]="listOfData" nzTableLayout="fixed" style="padding-right: 180px;">
+            <thead>
+                <tr>
+                    <th nzWidth="60px"></th>
+                    <th style="color: dodgerblue;">Name</th>
+                    <th style="color: dodgerblue;">Name Reporting</th>
+                    <th style="color: dodgerblue;">Field Name</th>
+                    <th style="color: dodgerblue;">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let data of nzTable.data">
+                    <tr>
+                        <td [nzExpand]="expandSet.has(data.id)" (nzExpandChange)="onExpandChange(data.id, $event)"></td>
+                        <td>{{ data.name }}</td>
+                        <td>{{ data.age }}</td>
+                        <td>{{ data.address }}</td>
+                        <td>
+
+                            <a (click)="showModal()"><i nz-icon nzType="file-add" nzTheme="outline"></i></a>
+                            <nz-divider nzType="vertical"></nz-divider>
+                            <a><i nz-icon nzType="delete" nzTheme="twotone"></i></a>
+                        </td>
+                    </tr>
+                    <tr [nzExpand]="expandSet.has(data.id)">
+                        <thead>
+                            <tr>
+                                <th nzWidth="60px"></th>
+                                <th style="color: dodgerblue;">Name</th>
+                                <th style="color: dodgerblue;">Name Reporting</th>
+                                <th style="color: dodgerblue;">Field Name</th>
+                                <th style="color: dodgerblue;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr>
+                                <td>{{ data.name }}</td>
+                                <td>{{ data.age }}</td>
+                                <td>{{ data.address }}</td>
+                                <td>
+                                    <a (click)="createTplModal(tplTitle, tplContent, tplFooter)"><i nz-icon nzType="file-add" nzTheme="outline"></i></a>
+                                    <nz-divider nzType="vertical"></nz-divider>
+                                    <a><i nz-icon nzType="delete" nzTheme="twotone"></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </nz-table>
+
+    </div>
+
+    <div class="steps-content" *ngIf="this.index == 'third-content'" style="background-color: white;">
+        <nz-result nzStatus="success" nzTitle="Successfully Purchased Cloud Server ECS!" nzSubTitle="Order number: 2017182818828182881 Cloud server configuration takes 1-5 minutes, please wait." style="padding-right: 250px;">
+            <div nz-result-extra>
+                <button nz-button nzType="primary">Go chart</button>
+
+            </div>
+        </nz-result>
+    </div>
+
+    <div class="steps-content" *ngIf="this.index == 'error'" style="background-color: white;">
+
+    </div>
+    <div class="steps-action" style="padding-left: 40px; padding-bottom: 30px;">
+        <button nz-button nzType="default" (click)="pre()" *ngIf="current > 0">
+      <span>Previous</span>
+    </button>
+        <button nz-button nzType="default" (click)="next()" *ngIf="current < 2">
+      <span>Next</span>
+    </button>
+        <button nz-button nzType="primary" (click)="done()" *ngIf="current === 2">
+      <span>Done</span>
+    </button>
+    </div>
+</nz-content>
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Abscisse X" (nzOnCancel)="handleCancell()" (click)="handleAdd()" [nzOkLoading]="isOkLoading">
+    <form nz-form style="padding-left: 120px;">
+        <nz-form-item>
+            <nz-form-control [nzSpan]="14">
+                <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a person" [(ngModel)]="selectedValue">
+                    <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
+                    <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
+                    <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+                </nz-select>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-control [nzSpan]="14">
+                <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a person" [(ngModel)]="selectedValue">
+                    <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
+                    <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
+                    <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+                </nz-select>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-control [nzSpan]="14">
+                <input nz-input placeholder="Filed Name" [(ngModel)]="value" />
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-control [nzSpan]="14">
+                <input nz-input placeholder="Reporting Name" [(ngModel)]="value" />
+            </nz-form-control>
+        </nz-form-item>
+    </form>
+</nz-modal>
+
+<ng-template #tplTitle>
+    <span>New Y</span>
+</ng-template>
+<ng-template #tplContent>
+    <!--  <form nz-form style="padding-left: 120px;">
+        <nz-form-item>
+            <nz-form-control [nzSpan]="14">
+                <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a person" [(ngModel)]="selectedValue">
+                    <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
+                    <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
+                    <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+                </nz-select>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+
+        </nz-form-item>
+
+    </form> -->
+    <div class="inner-content">
+        <div nz-col [nzSpan]="18" [nzPush]="6">
+            col-18 col-push-6
+        </div>
+        <nz-divider nzType="vertical"></nz-divider>
+
+        <div nz-col [nzSpan]="6" [nzPull]="18">
+            col-6 col-pull-18
+        </div>
+    </div>
+
+
+</ng-template>
+<ng-template #tplFooter>
+    <button nz-button nzType="default" (click)="handleCancel()">Cancel</button>
+    <button nz-button nzType="primary" (click)="destroyTplModal()" [nzLoading]="tplModalButtonLoading">
+      Close after submit
+    </button>
+</ng-template>

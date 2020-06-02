@@ -1,0 +1,120 @@
+<nz-content style="background-color: white; width: 100%; padding-left: 0px; padding-bottom: 15px;">
+    <div class="ant-card-head-wrapper">
+        <div class="ant-card-head-title">
+            <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit; padding-left: 15px; text-decoration: solid;"> Liste Sous-Module</font>
+            </font>
+        </div>
+        <div class="ant-card-extra">
+            <div style="padding-right: 14px;">
+                <span class="ant-input-search antd-pro-pages-list-basic-list-style-extraContentSearch ant-input-affix-wrapper">
+                    <input placeholder="please enter" class="ant-input" type="text" value="">
+                    <span class="ant-input-suffix">
+                        <span role="img" aria-label="search" tabindex="-1" class="anticon anticon-search ant-input-search-icon">
+                            <svg viewBox="64 64 896 896" focusable="false" class="" data-icon="search" width="1em" height="1em" fill="currentColor" aria-hidden="true">
+                                <path d="M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0011.6 0l43.6-43.5a8.2 8.2 0 000-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z"></path></svg></span></span>
+                </span>
+                <button nz-button nzType="dashed" nzBlock style="margin-top: 10px;" (click)="createTplModal(tplTitle, tplContent, tplFooter)">
+                    <i nz-icon nzType="plus-square" nzTheme="twotone"></i>Add</button>
+            </div>
+        </div>
+    </div>
+    <nz-table #nzTable [nzData]="mysousmodule" nzTableLayout="fixed" style="padding-left: 10px; padding-right: 10px;">
+        <thead style="background-color: white;">
+            <tr>
+                <th nzWidth="60px"></th>
+                <th style="color: dodgerblue;">#</th>
+                <th style="color: dodgerblue;">Nom Sous Module</th>
+                <th style="color: dodgerblue;">Module</th>
+                <th style="color: dodgerblue;">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let data of sousModule">
+                <tr>
+                    <td [nzExpand]="expandSet.has(data.idSousModule)" (nzExpandChange)="onExpandChange(data.idSousModule, $event)"></td>
+                    <td>{{ data.idSousModule}}</td>
+                    <td>{{ data.nomSousModule}}</td>
+                    <td>{{ data.module['nom'] }}</td>
+                    <td>
+                        <a (click)="showModal()" (click)="editsousmodule(data)"> <i nz-icon nzType="edit" nzTheme="twotone"></i></a>
+                        <nz-divider nzType="vertical"></nz-divider>
+                        <a (click)="showConfirm()" (click)="deletesousmodule(data.idSousModule)"><i nz-icon nzType="delete" nzTheme="twotone"></i></a>
+                    </td>
+                </tr>
+                <tr [nzExpand]="expandSet.has(data.idSousModule)">
+                    <span>{{ data.descriptionSousModule }}</span>
+                </tr>
+            </ng-container>
+        </tbody>
+    </nz-table>
+</nz-content>
+<!-- Create -->
+
+
+<ng-template #tplTitle>
+    <div class="alert alert-info" role="alert">
+        New Sous Module
+    </div>
+</ng-template>
+<ng-template #tplContent>
+    <form nz-form (ngSubmit)="onSubmit()">
+
+        <nz-form-item>
+
+            <nz-form-label [nzSpan]="6" nzFor="nomSousModule">Nom Sous Module</nz-form-label>
+            <nz-form-control [nzSpan]="14">
+                <input nz-input name="nomSousModule" type="text" id="nomSousModule" [(ngModel)]="sousmodul.nomSousModule">
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label [nzSpan]="6" nzFor="descriptionSousModule">Description</nz-form-label>
+            <nz-form-control [nzSpan]="14">
+                <input nz-input name="descriptionSousModule" type="text" id="descriptionSousModule" [(ngModel)]="sousmodul.descriptionSousModule">
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label [nzSpan]="6" nzFor="module">Module</nz-form-label>
+            <nz-form-control [nzSpan]="14">
+                <select [(ngModel)]="modulee" name="modulee">
+                            <option *ngFor="let mymodule of module"  id="idModule" value="{{mymodule.idModule}}" >
+                                {{ mymodule.nom }} 
+                            </option>
+                          </select>
+            </nz-form-control>
+        </nz-form-item>
+    </form>
+</ng-template>
+<ng-template #tplFooter>
+    <button nz-button (click)="destroyTplModal()" [nzLoading]="tplModalButtonLoading" nzType="primary">
+          Close after submit 
+        </button>
+</ng-template>
+
+<!--Update-->
+
+<nz-modal [(nzVisible)]="isVisible" [nzTitle]="modalTitle" [nzFooter]="modalFooter" (nzOnCancel)="handleCancel()">
+    <ng-template #modalTitle>
+        Update Sous Module
+    </ng-template>
+
+    <form nz-form #modalContent>
+        <nz-form-item>
+            <nz-form-label [nzSpan]="6" nzFor="nomSousModule">Nom Sous Module</nz-form-label>
+            <nz-form-control [nzSpan]="14">
+                <input nz-input name="nomSousModule" type="text" id="nomSousModule" [(ngModel)]="mysousmodule.nomSousModule">
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label [nzSpan]="6" nzFor="descriptionSousModule">Description</nz-form-label>
+            <nz-form-control [nzSpan]="14">
+                <input nz-input name="descriptionSousModule" type="text" id="descriptionSousModule" [(ngModel)]="mysousmodule.descriptionSousModule">
+            </nz-form-control>
+        </nz-form-item>
+    </form>
+
+    <ng-template #modalFooter>
+        <button nz-button nzType="default" (click)="handleCancel()">Cancel</button>
+        <button nz-button nzType="primary" (click)="updatesousModule()" (click)="handleOk()" [nzLoading]="isConfirmLoading">Submit</button>
+    </ng-template>
+</nz-modal>
