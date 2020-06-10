@@ -1,7 +1,8 @@
 <div class="login-x">
     <div nz-row [nzGutter]="8">
         <div nz-col [nzSpan]="8" style="margin-left: 350px;">
-            <nz-card nzTitle="Sign In" class="card-form">
+            <nz-card class="card-form" style="width:300px;" [nzExtra]="extraTemplate">
+
                 <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="onSubmit()" name="form">
                     <nz-form-item>
                         <nz-form-control nzErrorTip="Please input your username!">
@@ -26,7 +27,7 @@
                     <nz-form-item>
                         <nz-form-control>
                             <button nz-button class="login-form-button" [nzType]="'primary'">
-                                LogIn
+                                Sign In
                             </button> Or
                             <a routerLink="/forgotpass">Forgot password ?</a>
                         </nz-form-control>
@@ -34,6 +35,11 @@
                     </nz-form-item>
                 </form>
             </nz-card>
+            <ng-template #extraTemplate>
+
+                <img alt="logo" src="assets\logoelite.jpg" style="width: 83px; margin-right: 90px; border-radius: 50px;">
+
+            </ng-template>
         </div>
 
     </div>

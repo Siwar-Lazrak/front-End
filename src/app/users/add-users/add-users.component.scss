@@ -17,5 +17,29 @@ button {
     height: 41px;
     border-radius: 50%;
     border-color: #08c;
-    ;
+}
+
+.antd-pro-pages-account-settings-style-title {
+    margin-bottom: 12px;
+    color: rgba(0, 0, 0, .85);
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 28px;
+}
+
+blockquote {
+    border-left: 4px solid #ccc;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    padding-left: 16px;
+}
+
+.ql-syntax {
+    background-color: #23241f;
+    color: #f8f8f2;
+    overflow: visible;
+    white-space: pre-wrap;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    padding: 5px 10px;
 }

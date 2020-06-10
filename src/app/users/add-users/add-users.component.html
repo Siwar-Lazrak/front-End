@@ -1,13 +1,12 @@
-<div nz-row nzJustify="space-between" style="margin-right: 0px;">
-
-    <nz-card style="width:200px;  margin-bottom: 50px;" nz-col [nzSpan]="4">
+<div nz-row nzJustify="space-between">
+    <nz-card style="width:200px; margin-right: auto;  margin-bottom: 30px;" nz-col [nzSpan]="4">
         <p style="margin-top: 40px;">
             <i nz-icon nzType="plus-circle" nzTheme="twotone" style="font-size: 20px" (click)="createTplModal( tplContent, tplFooter)">
             </i> Add New User
         </p>
     </nz-card>
 
-    <nz-card style="width:200px; margin-bottom: 50px; margin-bottom: 50px;" nz-col [nzSpan]="6" *ngFor="let user of users" [nzActions]="[actionSetting, actionEdit, actionEllipsis]">
+    <nz-card style="width:180px; margin-right: auto; margin-bottom: 30px;" nz-col [nzSpan]="6" *ngFor="let user of users" [nzActions]="[actionSetting, actionEdit, actionEllipsis]">
         <p> <img src="assets\siwar.jpg" alt="Avatar" class="avatar">
             <b style="padding-left: 15px;">{{ user.username }}</b>
         </p>
@@ -65,8 +64,11 @@
 
 
 <ng-template #tplContent>
-    <nz-tabset>
-        <nz-tab nzTitle="New User">
+    <nz-tabset [nzTabPosition]="position">
+        <nz-tab nzTitle="Add New User">
+            <div class="antd-pro-pages-account-settings-style-title">
+                New user
+            </div>
             <form nz-form [formGroup]="validateForm" (ngSubmit)="onSubmit()" name="form">
                 <nz-form-item>
                     <nz-form-label [nzSpan]="7" nzRequired>Username</nz-form-label>
@@ -113,29 +115,32 @@
                 </nz-form-item>
             </form>
         </nz-tab>
-        <nz-tab nzTitle="Send Email">
-
+        <nz-tab nzTitle="Send Access">
+            <div class="antd-pro-pages-account-settings-style-title">
+                New Email
+            </div>
             <form nz-form [formGroup]="validateForm2" (ngSubmit)="onSubmitEmail()">
                 <nz-form-item>
                     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="to">Send To</nz-form-label>
                     <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
-                        <input nz-input formControlName="to" id="to" name="to" [(ngModel)]="model.to" />
+                        <input nz-input formControlName="to" placeholder="To:" id="to" name="to" [(ngModel)]="model.to" />
                     </nz-form-control>
                 </nz-form-item>
 
                 <nz-form-item>
                     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="messageSubject">Subject</nz-form-label>
                     <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
-                        <input nz-input formControlName="messageSubject" id="messageSubject" placeholder="Accées" name="messageSubject" [(ngModel)]="model.messageSubject" />
+                        <input disabled nz-input formControlName="messageSubject" id="messageSubject" placeholder="You pasword and Login:" name="messageSubject" [(ngModel)]="model.messageSubject" />
                     </nz-form-control>
                 </nz-form-item>
 
                 <nz-form-item>
-                    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="messageBody">Message</nz-form-label>
-                    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please write something here!">
-                        <textarea formControlName="messageBody" nz-input rows="2" placeholder="Votre user accées est: 
-                    Usename: .. Password: " name="messageBody" id="messageBody" [(ngModel)]="model.messageBody"></textarea>
-                    </nz-form-control>
+                    <quill-editor formControlName="messageBody" [(ngModel)]="model.messageBody">
+
+
+                    </quill-editor>
+
+
                 </nz-form-item>
 
             </form>

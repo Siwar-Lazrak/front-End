@@ -6,6 +6,7 @@ import { Contact } from './../../Model/Contact';
 import { Router } from '@angular/router';
 import { Module } from 'src/app/Model/Module';
 import { UserModel } from './../../Model/UserModel';
+import { NzTabPosition } from 'ng-zorro-antd/tabs';
 
 import { TokenStorageService } from 'src/app/service/token-storage.service';
 import { Observable } from 'rxjs';
@@ -21,6 +22,8 @@ import { SousModule } from 'src/app/Model/sousModule';
   styleUrls: ['./add-users.component.scss']
 })
 export class AddUsersComponent implements OnInit {
+  // tslint:disable-next-line:max-line-length
+  constructor(private userService: UserService, private formBuilder: FormBuilder, private message: NzMessageService, private router: Router, private tokenStorage: TokenStorageService, private modalService: NzModalService) { }
 
   useer: UserModel;
 User: UserModel[];
@@ -65,6 +68,7 @@ disabled = false;
   errorMessage = '';
   validateForm: FormGroup;
   validateForm2: FormGroup;
+  position: NzTabPosition = 'left';
 
   submitForm2(): void {
     // tslint:disable-next-line:forin
@@ -135,8 +139,6 @@ disabled = false;
   handleCancel(): void {
     this.isVisible = false;
   }
-  // tslint:disable-next-line:max-line-length
-  constructor(private userService: UserService, private formBuilder: FormBuilder, private message: NzMessageService, private router: Router, private tokenStorage: TokenStorageService, private modalService: NzModalService) { }
 
   ngOnInit() {
     this.validateForm = this.formBuilder.group({

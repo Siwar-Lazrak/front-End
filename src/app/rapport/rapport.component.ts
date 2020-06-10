@@ -2,11 +2,12 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { SousModule } from '../Model/sousModule';
 import { Rapport } from '../Model/Rapport';
 import { TokenStorageService } from '../service/token-storage.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from '../service/user.service';
 import { Observable } from 'rxjs';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd';
 import { Module } from '../Model/Module';
+import { Tables } from '../Model/Tables';
 import { Useraccess } from '../Model/Useraccess';
 import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { NzCascaderOption } from 'ng-zorro-antd/cascader';
@@ -16,29 +17,31 @@ const options = [
 
 ];
 
+
 @Component({
   selector: 'app-rapport',
   templateUrl: './rapport.component.html',
   styleUrls: ['./rapport.component.scss']
 })
 export class RapportComponent implements OnInit {
+  tableName: string;
+  column: any;
+  responseListeJobTask2: any;
+  i: string;
  // tslint:disable-next-line:max-line-length
- constructor(private modalService: NzModalService, private userService: UserService, private tokenStorage: TokenStorageService, private router: Router) { }
+ constructor(private route: ActivatedRoute, private modalService: NzModalService, private userService: UserService, private tokenStorage: TokenStorageService, private router: Router) { }
  selectedOS = null;
  validateForm: FormGroup;
  selectedValue = null;
  nzOptions: NzCascaderOption[] = options;
  values: string[] | null = null;
  isVisible = false;
+ tables: number;
 
- // tslint:disable-next-line:member-ordering
- myrapport: Rapport = {
-   idRapport: null,
-   nomRapport: '',
-   descriptionRapport: '',
-   idSousModule: null,
-   sousmodule: null,
- };
+ table: any[];
+ columns: any[];
+ tablecolumns: any[];
+ sousmodu: number;
 
  current = 0;
  index = 'First-content';
@@ -54,6 +57,7 @@ private roles: string[];
   email: any;
  username: string;
    module: Module[];
+   idtabe: any;
 
  sousModule: SousModule[];
  rapport: Rapport[];
@@ -171,9 +175,7 @@ private roles: string[];
      }
    }
  }
- onChanges(values: string[]): void {
-   console.log(values, this.values);
- }
+
 
  open(): void {
    this.isVisible = true;
@@ -223,19 +225,7 @@ ngOnInit(): void {
      this.id = user.id;
      console.log(this.id);
    }
-
   if (this.tokenStorage.getToken()) {
-       this.isLoggedIn = true;
-       this.userService.getRapportList().subscribe(
-         (data: Rapport[]) => {
-           console.log(data);
-           this.rapport = data;
-           console.log(data);
-         },
-         err => {
-           console.log('erreur');
-         }
-       );
        this.userService.getSousmoduleList().subscribe(
          (data: SousModule[]) => {
            this.sousModule = data;
@@ -244,14 +234,14 @@ ngOnInit(): void {
            console.log('erreur');
          }
        );
-       this.userService.getModuleList().subscribe(
-       (data: Module[]) => {
-         this.module = data;
-       },
-       err => {
-         console.log('erreur');
-       }
-     );
+       this.userService.getAlltables().subscribe(
+        (data => {
+          this.table = data;
+        }),
+        err => {
+          console.log('erreur');
+        }
+      );
        this.isLoggedIn = true;
        this.userService.getAccessList().subscribe(
        (data: Useraccess[]) => {
@@ -266,6 +256,21 @@ ngOnInit(): void {
      }
 
    }
+
+   getColumn(event) {
+    if (this.tokenStorage.getToken()) {
+      this.userService.getTablesColumns(event.target.value).subscribe(
+        (data => {
+          // tslint:disable-next-line:semicolon
+          this.columns = data;
+
+        }),
+        () => {
+          console.log('erreur');
+        }
+      );
+   }
+  }
    createTplModal(tplTitle: TemplateRef<{}>, tplContent: TemplateRef<{}>, tplFooter: TemplateRef<{}>): void {
      this.tplModal = this.modalService.create({
        nzTitle: tplTitle,
@@ -279,14 +284,6 @@ ngOnInit(): void {
    destroyTplModal(): void {
      if (this.tokenStorage.getToken()) {
        this.isLoggedIn = true;
-       console.log('west el if');
-
-       const id = this.sousModule[0].idSousModule;
-       console.log(id);
-       this.userService.createRapport(this.rapports, id).subscribe(
-         data => console.log(data),
-         error => console.log(error));
-       this.rapports = new Rapport();
        this.tplModalButtonLoading = true;
        setTimeout(() => {
          this.tplModalButtonLoading = false;
@@ -296,13 +293,8 @@ ngOnInit(): void {
    }
    onSubmit() {
      this.submitted = true;
-     this.destroyTplModal();
    }
    deleterapport() {
 
    }
-   editrapport() {
-
-}
-
 }

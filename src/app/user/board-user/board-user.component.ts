@@ -35,9 +35,11 @@ export class BoardUserComponent implements OnInit {
    };
 
    myrapport: Rapport = {
-     idRapport: null,
-     nomRapport: '',
-     descriptionRapport: '',
+    idRapport: null,
+    nomRapport: '',
+    title: '',
+    chartType: '',
+    descriptionRapport: '',
      idSousModule: null,
      sousmodule: null,
    };

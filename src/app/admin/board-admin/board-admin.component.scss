@@ -149,14 +149,6 @@ nz-alert {
     flex: none;
 }
 
-button {
-    margin-right: 8px;
-    margin-bottom: 8px;
-    width: 70px;
-    text-align: center;
-    padding: 0;
-}
-
 ul.img {
     border: 1px solid #ddd;
     border-radius: 4px;
@@ -188,4 +180,5 @@ ul.demo {
 
 nz-time-picker {
     margin: 0 8px 12px 0;
+    border-color: rgb(5, 5, 112);
 }

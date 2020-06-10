@@ -2,9 +2,10 @@
     <nz-header>
         <div class="logo">
             <a (click)="open()">
-                <img alt="logo" src="assets\logoelite.jpg" style="width: 63px; border-radius: 50px; margin-left: 10px; margin-top: 5px;">
+                <img alt="logo" src="assets\logoelite.jpg" style="width: 63px; border-radius: 50px; margin-left: 10px; margin-top: 5px; margin-bottom: 25px;">
             </a>
         </div>
+
         <nz-drawer [nzClosable]="false" [nzVisible]="visible" nzPlacement="right" nzType="link" nzTitle="Elite Business & Consulting" (nzOnClose)="close()">
             <p><b style="color: rgb(105, 170, 245);">Elite Business & Consulting </b> <br> a été fondée en 2011, c’est une société à responsabilité limitée spécialisée dans le domaine de la télécommunication, comptant cinq collaborateurs bénéficiant d’une
                 expérience dans les opérateurs de télécommunications. Ses experts et consultants cultivent une connaissance pour répondre à l’ensemble des enjeux du Revenue Assurance Fraude chez les opérateurs télécom. <br><b style="color: rgb(105, 170, 245);">Elite Business &  Consulting </b>développe
@@ -16,28 +17,155 @@
             <div nz-row style="margin-bottom: 50px;">
                 <div nz-col [nzSpan]="18" [nzPush]="6" style="display: inline-block;">
                     <div nz-row nzType="flex" nzJustify="end">
+                        <div nz-col [nzSpan]="2" style="padding-left: 1%;">
+
+
+                        </div>
                         <div nz-col [nzSpan]="4" style="padding-left: 1%;">
                             <nz-time-picker [(ngModel)]="time"></nz-time-picker>
                         </div>
-                        <div nz-col>
-                            <ng-template #template let-notification>
-                                <div class="ant-notification-notice-content">
-                                    <div>
-                                        <div class="ant-notification-notice-message">Notification Title</div>
-                                        <div class="ant-notification-notice-description">
-                                            A function will be be called after the notification is closed (automatically after the "duration" time of manually).
+
+                        <div nz-col [nzSpan]="2">
+                            <nz-button-group nzSpan="4" nzPlacement="bottomLeft" nz-popover nzPopoverTitle="" [nzPopoverContent]="contentTemplate" nzPopoverPlacement="bottomLeft">
+                                <span role="img" aria-label="bell" class="anticon anticon-bell antd-pro-components-notice-icon-index-icon">
+                                    <svg viewBox="64 64 896 896" focusable="false" class="" data-icon="bell" style="width: 30px; margin-top: 18px; color: rgb(5, 5, 112);"  fill="currentColor" aria-hidden="true">
+                                        <path d="M816 768h-24V428c0-141.1-104.3-257.7-240-277.1V112c0-22.1-17.9-40-40-40s-40 17.9-40 40v38.9c-135.7 19.4-240 136-240 277.1v340h-24c-17.7 0-32 14.3-32 32v32c0 4.4 3.6 8 8 8h216c0 61.8 50.2 112 112 112s112-50.2 112-112h216c4.4 0 8-3.6 8-8v-32c0-17.7-14.3-32-32-32zM512 888c-26.5 0-48-21.5-48-48h96c0 26.5-21.5 48-48 48zM304 768V428c0-55.6 21.6-107.8 60.9-147.1S456.4 220 512 220c55.6 0 107.8 21.6 147.1 60.9S720 372.4 720 428v340H304z">
+                                        </path>
+                                    </svg>
+                                </span>
+                            </nz-button-group>
+                            <ng-template #contentTemplate>
+                                <ul class="ant-list-items">
+                                    <li class="ant-list-item antd-pro-components-notice-icon-notice-list-item">
+                                        <div class="ant-list-item-meta antd-pro-components-notice-icon-notice-list-meta">
+                                            <div class="ant-list-item-meta-avatar">
+                                                <span class="ant-avatar antd-pro-components-notice-icon-notice-list-avatar ant-avatar-circle ant-avatar-image">
+                                                    <img src="https://gw.alipayobjects.com/zos/rmsportal/ThXAXghbEsBCCSDihZxY.png"></span></div>
+                                            <div class="ant-list-item-meta-content">
+                                                <h4 class="ant-list-item-meta-title">
+                                                    <div class="antd-pro-components-notice-icon-notice-list-title">
+                                                        <font style="vertical-align: inherit;">
+                                                            <font style="vertical-align: inherit;"></font>
+                                                        </font>
+                                                        <div class="antd-pro-components-notice-icon-notice-list-extra"></div>
+                                                    </div>
+                                                </h4>
+                                                <div class="ant-list-item-meta-description">
+                                                    <div>
+                                                        <div class="antd-pro-components-notice-icon-notice-list-description"></div>
+                                                        <div class="antd-pro-components-notice-icon-notice-list-datetime">
+                                                            <font style="vertical-align: inherit;">
+                                                                <font style="vertical-align: inherit;"></font>
+                                                            </font>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <span class="ant-notification-notice-btn">
-                                  <button nz-button nzType="primary" nzSize="small" (click)="notification.close()">
-                                    <span>Confirm</span>
-                                        </button>
-                                        </span>
-                                    </div>
-                                </div>
+                                    </li>
+                                    <li class="ant-list-item antd-pro-components-notice-icon-notice-list-item">
+                                        <div class="ant-list-item-meta antd-pro-components-notice-icon-notice-list-meta">
+                                            <div class="ant-list-item-meta-avatar"><span class="ant-avatar antd-pro-components-notice-icon-notice-list-avatar ant-avatar-circle ant-avatar-image"><img src="https://gw.alipayobjects.com/zos/rmsportal/OKJXDXrmkNshAMvwtvhu.png"></span></div>
+                                            <div class="ant-list-item-meta-content">
+                                                <h4 class="ant-list-item-meta-title">
+                                                    <div class="antd-pro-components-notice-icon-notice-list-title">
+                                                        <font style="vertical-align: inherit;">
+                                                            <font style="vertical-align: inherit;"></font>
+                                                        </font>
+                                                        <div class="antd-pro-components-notice-icon-notice-list-extra"></div>
+                                                    </div>
+                                                </h4>
+                                                <div class="ant-list-item-meta-description">
+                                                    <div>
+                                                        <div class="antd-pro-components-notice-icon-notice-list-description"></div>
+                                                        <div class="antd-pro-components-notice-icon-notice-list-datetime">
+                                                            <font style="vertical-align: inherit;">
+                                                                <font style="vertical-align: inherit;"></font>
+                                                            </font>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="ant-list-item antd-pro-components-notice-icon-notice-list-item antd-pro-components-notice-icon-notice-list-read">
+                                        <div class="ant-list-item-meta antd-pro-components-notice-icon-notice-list-meta">
+                                            <div class="ant-list-item-meta-avatar"><span class="ant-avatar antd-pro-components-notice-icon-notice-list-avatar ant-avatar-circle ant-avatar-image"><img src="https://gw.alipayobjects.com/zos/rmsportal/kISTdvpyTAhtGxpovNWd.png"></span></div>
+                                            <div class="ant-list-item-meta-content">
+                                                <h4 class="ant-list-item-meta-title">
+                                                    <div class="antd-pro-components-notice-icon-notice-list-title">
+                                                        <font style="vertical-align: inherit;">
+                                                            <font style="vertical-align: inherit;"></font>
+                                                        </font>
+                                                        <div class="antd-pro-components-notice-icon-notice-list-extra"></div>
+                                                    </div>
+                                                </h4>
+                                                <div class="ant-list-item-meta-description">
+                                                    <div>
+                                                        <div class="antd-pro-components-notice-icon-notice-list-description"></div>
+                                                        <div class="antd-pro-components-notice-icon-notice-list-datetime">
+                                                            <font style="vertical-align: inherit;">
+                                                                <font style="vertical-align: inherit;"></font>
+                                                            </font>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="ant-list-item antd-pro-components-notice-icon-notice-list-item">
+                                        <div class="ant-list-item-meta antd-pro-components-notice-icon-notice-list-meta">
+                                            <div class="ant-list-item-meta-avatar"><span class="ant-avatar antd-pro-components-notice-icon-notice-list-avatar ant-avatar-circle ant-avatar-image"><img src="https://gw.alipayobjects.com/zos/rmsportal/GvqBnKhFgObvnSGkDsje.png"></span></div>
+                                            <div class="ant-list-item-meta-content">
+                                                <h4 class="ant-list-item-meta-title">
+                                                    <div class="antd-pro-components-notice-icon-notice-list-title">
+                                                        <font style="vertical-align: inherit;">
+                                                            <font style="vertical-align: inherit;"></font>
+                                                        </font>
+                                                        <div class="antd-pro-components-notice-icon-notice-list-extra"></div>
+                                                    </div>
+                                                </h4>
+                                                <div class="ant-list-item-meta-description">
+                                                    <div>
+                                                        <div class="antd-pro-components-notice-icon-notice-list-description"></div>
+                                                        <div class="antd-pro-components-notice-icon-notice-list-datetime">
+                                                            <font style="vertical-align: inherit;">
+                                                                <font style="vertical-align: inherit;"></font>
+                                                            </font>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="ant-list-item antd-pro-components-notice-icon-notice-list-item">
+                                        <div class="ant-list-item-meta antd-pro-components-notice-icon-notice-list-meta">
+                                            <div class="ant-list-item-meta-avatar"><span class="ant-avatar antd-pro-components-notice-icon-notice-list-avatar ant-avatar-circle ant-avatar-image"><img src="https://gw.alipayobjects.com/zos/rmsportal/ThXAXghbEsBCCSDihZxY.png"></span></div>
+                                            <div class="ant-list-item-meta-content">
+                                                <h4 class="ant-list-item-meta-title">
+                                                    <div class="antd-pro-components-notice-icon-notice-list-title">
+                                                        <font style="vertical-align: inherit;">
+                                                            <font style="vertical-align: inherit;"></font>
+                                                        </font>
+                                                        <div class="antd-pro-components-notice-icon-notice-list-extra"></div>
+                                                    </div>
+                                                </h4>
+                                                <div class="ant-list-item-meta-description">
+                                                    <div>
+                                                        <div class="antd-pro-components-notice-icon-notice-list-description"></div>
+                                                        <div class="antd-pro-components-notice-icon-notice-list-datetime">
+                                                            <font style="vertical-align: inherit;">
+                                                                <font style="vertical-align: inherit;"></font>
+                                                            </font>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+
                             </ng-template>
-                            <nz-badge nzDot (click)="createBasicNotification(template)">
-                                <i nz-icon nzType="alert" nzTheme="outline" style="font-size: 20px;"></i>
-                            </nz-badge>
                         </div>
                         <div nz-col [nzSpan]="2" *ngIf="isLoggedIn">
                             <nz-button-group nzSpan="4" nzPlacement="bottomRight" nz-popover nzPopoverTitle="" [nzPopoverContent]="contentTemplate" nzPopoverPlacement="bottomRight">
@@ -75,7 +203,6 @@
                 <li nz-menu-item routerLink="home">
                     <i nz-icon nzType="dashboard" nzTheme="outline"></i>
                     <span>Dashboard</span>
-
                 </li>
                 <li nz-submenu nzTitle="User" nzIcon="user">
                     <ul>
@@ -102,7 +229,7 @@
             </ul>
         </nz-sider>
         <nz-layout class="inner-layout">
-            <!--  <div class="ant-pro-page-header-wrap-page-header-warp" style="background-color: white;">
+            <div class="ant-pro-page-header-wrap-page-header-warp" style="padding-left: 4px;">
                 <div class="ant-pro-grid-content">
                     <div class="ant-page-header has-breadcrumb ant-page-header-ghost">
                         <div class="ant-breadcrumb">
@@ -112,64 +239,16 @@
                             <span class="ant-breadcrumb-separator">/</span></span>
                             <span><span class="ant-breadcrumb-link"><span>Card List</span></span>
                             <span class="ant-breadcrumb-separator">
-                <font style="vertical-align: inherit;">
-                <font style="vertical-align: inherit;">/</font></font></span></span>
+                                <font style="vertical-align: inherit;">
+                                <font style="vertical-align: inherit;">/</font></font>
+                            </span>
+                            </span>
                         </div>
                     </div>
                 </div>
-            </div> -->
+            </div>
             <nz-content style="background-color: #f0f2f5;">
-
-                <!--   <div style="padding-bottom:10px;">
-                        <div nz-row [nzGutter]="8">
-
-                            <div nz-col [nzSpan]="8">
-                                <nz-card nzTitle="Module" routerLink="moduleadmin" [nzHoverable] [nzExtra]="extraTemplatemodule" class="cardStyle">
-                                    <nz-col [nzSpan]="12">
-                                        <nz-statistic [nzValue]="" [nzTitle]="'Active'" [nzPrefix]="prefixTplOne" [nzSuffix]="'%'" [nzValueStyle]="{ color: '#3F8600' }">
-
-                                        </nz-statistic>
-                                        <ng-template #prefixTplOne><i nz-icon nzType="arrow-up"></i></ng-template>
-                                    </nz-col>
-                                </nz-card>
-                                <ng-template #extraTemplatemodule>
-                                    <i nz-icon nzType="plus-circle" nzTheme="twotone" style="font-size: 30px; color: #08c;" routerLink="module"></i>
-                                </ng-template>
-                            </div>
-                            <div nz-col [nzSpan]="8">
-                                <nz-card nzTitle="Sous-Module" routerLink="sousmoduleAdmin" [nzExtra]="extraTemplatesousmodule" class="cardStyle">
-                                    <nz-col [nzSpan]="12">
-                                        <nz-statistic [nzValue]="" [nzTitle]="'Active'" [nzPrefix]="prefixTplOne" [nzSuffix]="'%'" [nzValueStyle]="{ color: '#3F8600' }">
-
-                                        </nz-statistic>
-                                        <ng-template #prefixTplOne><i nz-icon nzType="arrow-up"></i></ng-template>
-                                    </nz-col>
-                                </nz-card>
-
-                                <ng-template #extraTemplatesousmodule>
-                                    <i nz-icon nzType="plus-circle" nzTheme="outline" style="font-size: 30px; color: #08c;" routerLink="sous-module">
-                                    </i>
-                                </ng-template>
-                            </div>
-                            <div nz-col [nzSpan]="8">
-                                <nz-card nzTitle="Rapport" routerLink="rapport" [nzExtra]="extraTemplaterepport" class="cardStyle">
-                                    <nz-col [nzSpan]="12">
-                                        <nz-statistic [nzValue]="" [nzTitle]="'Active'" [nzPrefix]="prefixTplOne" [nzSuffix]="'%'" [nzValueStyle]="{ color: '#3F8600' }">
-
-                                        </nz-statistic>
-                                        <ng-template #prefixTplOne><i nz-icon nzType="arrow-up"></i></ng-template>
-                                    </nz-col>
-                                </nz-card>
-                                <ng-template #extraTemplaterepport>
-                                    <i nz-icon nzType="plus-circle" nzTheme="outline" style="font-size: 30px; color: #08c;" routerLink="rapport"></i>
-
-                                </ng-template>
-                            </div>
-                        </div>
-                    </div> -->
-                <div class="inner-content" style="background-color: #f0f2f5;">
-                    <router-outlet></router-outlet>
-                </div>
+                <router-outlet></router-outlet>
             </nz-content>
         </nz-layout>
     </nz-layout>

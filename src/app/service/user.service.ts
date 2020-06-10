@@ -8,6 +8,7 @@ import { Module } from 'src/app/Model/Module';
 import { SousModule } from 'src/app/Model/sousModule';
 import { Useraccess } from 'src/app/Model/Useraccess';
 import { Rapport } from 'src/app/Model/Rapport';
+import { Tables } from '../Model/Tables';
 
 const API_URL = 'http://localhost:8080/api/test/';
 const baseUrl = 'http://localhost:8080/api/test';
@@ -87,7 +88,8 @@ export class UserService {
   deleteModule(idModule: number): Observable<any> {
     return this.http.delete(`${API_URL}deleteModule/${idModule}`, { responseType: 'text' });
   }
-  getModule(idModule: number): Observable<any> {
+
+  getModule(idModule): Observable<any> {
     return this.http.get(`${baseUrl}/getModuleId/${idModule}`);
   }
 // sousmodule
@@ -123,7 +125,7 @@ getAccessList(): Observable<any> {
 }
 
 // <!--Rapport-->
-createRapport(rapport, idSousModule: number): Observable<any> {
+createRapport(rapport, idSousModule): Observable<any> {
   return this.http.post(`http://localhost:8080/api/test/createRapport/${idSousModule}`, rapport);
 }
 getRapportList(): Observable<any> {
@@ -143,6 +145,16 @@ confirmReset(): Observable<any> {
 // <!--reset-token-->
 resetPassword(email: string, password: string): Observable<any> {
   return this.http.post(`http://localhost:8080/api/test/reset-password/${email}/${password}`, httpOptions);
+}
+
+// <!--gettables-->
+
+getAlltables(): Observable<any> {
+  return this.http.get<Tables>(API_URL + 'getAlltables', httpOptions );
+}
+
+getTablesColumns(tableName): Observable<any> {
+  return this.http.get(API_URL + `getTablesColumns?tableName=${tableName}`, httpOptions );
 }
 
 }

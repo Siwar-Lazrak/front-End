@@ -21,6 +21,7 @@ export class BoardAdminComponent implements OnInit {
   time = new Date();
    // avatar
    isVisible = false;
+   dot = true;
 
    mysousmodule: SousModule = {
      idSousModule: null,
@@ -36,9 +37,11 @@ export class BoardAdminComponent implements OnInit {
    };
 
    myrapport: Rapport = {
-     idRapport: null,
-     nomRapport: '',
-     descriptionRapport: '',
+    idRapport: null,
+    nomRapport: '',
+    title: '',
+    chartType: '',
+    descriptionRapport: '',
      idSousModule: null,
      sousmodule: null,
    };

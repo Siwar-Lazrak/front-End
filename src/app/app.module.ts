@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { IconsProviderModule } from './icons-provider.module';
-import { NgZorroAntdModule, NZ_I18N, en_US, NZ_ICONS} from 'ng-zorro-antd';
+import { NgZorroAntdModule, NZ_I18N, en_US, NZ_ICONS, NzButtonModule} from 'ng-zorro-antd';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -48,8 +48,8 @@ import { RapportComponent } from './rapport/rapport.component';
 import { ModuleAdminComponent } from './admin/module-admin/module-admin.component';
 import { SousmodAdminComponent } from './admin/sousmod-admin/sousmod-admin.component';
 import { BoardAdminComponent } from './admin/board-admin/board-admin.component';
-
-
+import { QuillModule} from 'ngx-quill';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { authInterceptorProviders } from './service/authInterceptorProviders';
 import { ForgotPassComponent } from './authenti/forgot-pass/forgot-pass.component';
 import { ResetPasswordComponent } from './authenti/reset-password/reset-password.component';
@@ -78,6 +78,7 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     ResetPasswordComponent
   ],
   imports: [
+    BrowserModule,
     CommonModule,
     AppRoutingModule,
     NzTreeModule,
@@ -99,6 +100,7 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     ScrollingModule,
     HttpClientJsonpModule,
     NzFormModule,
+    QuillModule.forRoot(),
     NzLayoutModule,
     NzMenuModule,
     NzIconModule,
@@ -110,6 +112,12 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     NzListModule,
     NzTableModule,
     RouterModule,
+    NzTabsModule,
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
+   NzButtonModule,
+
+
+
 
   ],
   exports: [RouterModule],
