@@ -39,7 +39,6 @@ export class BoardUserComponent implements OnInit {
     nomRapport: '',
     title: '',
     chartType: '',
-    descriptionRapport: '',
      idSousModule: null,
      sousmodule: null,
    };

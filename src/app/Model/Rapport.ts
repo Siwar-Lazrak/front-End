@@ -5,7 +5,6 @@ export class Rapport {
     nomRapport: string;
     title: string;
     chartType: string;
-    descriptionRapport: string;
     idSousModule: number;
     sousmodule: SousModule['idSousModule'];
 }

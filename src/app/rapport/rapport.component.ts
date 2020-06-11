@@ -11,6 +11,7 @@ import { Tables } from '../Model/Tables';
 import { Useraccess } from '../Model/Useraccess';
 import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { NzCascaderOption } from 'ng-zorro-antd/cascader';
+import { Xabscisse } from '../Model/Xabscisse';
 
 
 const options = [
@@ -36,12 +37,14 @@ export class RapportComponent implements OnInit {
  nzOptions: NzCascaderOption[] = options;
  values: string[] | null = null;
  isVisible = false;
- tables: number;
+ tables: any;
 
  table: any[];
  columns: any[];
  tablecolumns: any[];
- sousmodu: number;
+ sousmodu: any;
+ idra: any;
+ raport: any;
 
  current = 0;
  index = 'First-content';
@@ -63,6 +66,7 @@ private roles: string[];
  rapport: Rapport[];
  isLoggedIn = false;
  rapports: Rapport = new Rapport();
+ xabscisse: Xabscisse = new Xabscisse();
  mapOfExpandData: { [key: string]: boolean } = {};
 
  // tslint:disable-next-line:align
@@ -150,6 +154,7 @@ private roles: string[];
  next(): void {
    this.current += 1;
    this.changeContent();
+  //  this.createRapport();
  }
 
  done(): void {
@@ -192,9 +197,6 @@ private roles: string[];
  showModal(): void {
    this.isVisible = true;
  }
- showModal2(): void {
-  this.isVisible = true;
-}
   onExpandChange(id: number, checked: boolean): void {
     if (checked) {
       this.expandSet.add(id);
@@ -221,7 +223,6 @@ ngOnInit(): void {
      const user = this.tokenStorage.getUser();
      this.roles = user.roles;
      this.username = user.username;
-
      this.id = user.id;
      console.log(this.id);
    }
@@ -242,7 +243,6 @@ ngOnInit(): void {
           console.log('erreur');
         }
       );
-       this.isLoggedIn = true;
        this.userService.getAccessList().subscribe(
        (data: Useraccess[]) => {
          this.useraccess = data;
@@ -253,9 +253,27 @@ ngOnInit(): void {
        }
      );
 
-     }
+       this.userService.getRapportList().subscribe(
+      (data: Rapport[]) => {
+        this.rapport = data;
+        console.log(data);
+      },
+      err => {
+        console.log('erreur');
+      }
+    );
 
+     }
    }
+/*    createRapport(){
+    this.userService.createRapport(this.rapports, this.sousmodu).subscribe(
+      data =>
+      console.log(data),
+      error => console.log(error));
+    this.rapports = new Rapport();
+    this.idra = document.getElementById('idRapport');
+    console.log('bonjour==' + this.idra);
+   } */
 
    getColumn(event) {
     if (this.tokenStorage.getToken()) {
@@ -271,6 +289,7 @@ ngOnInit(): void {
       );
    }
   }
+
    createTplModal(tplTitle: TemplateRef<{}>, tplContent: TemplateRef<{}>, tplFooter: TemplateRef<{}>): void {
      this.tplModal = this.modalService.create({
        nzTitle: tplTitle,
@@ -284,6 +303,16 @@ ngOnInit(): void {
    destroyTplModal(): void {
      if (this.tokenStorage.getToken()) {
        this.isLoggedIn = true;
+       this.userService.createRapport(this.rapports, this.sousmodu).subscribe(
+        data =>
+        console.log(data),
+        error => console.log(error));
+       this.rapports = new Rapport();
+    
+       this.userService.createXabscisse(this.xabscisse, this.raport).subscribe(
+        data => console.log(data),
+        error => console.log(error));
+       this.xabscisse = new Xabscisse();
        this.tplModalButtonLoading = true;
        setTimeout(() => {
          this.tplModalButtonLoading = false;
@@ -293,6 +322,7 @@ ngOnInit(): void {
    }
    onSubmit() {
      this.submitted = true;
+     this.destroyTplModal();
    }
    deleterapport() {
 

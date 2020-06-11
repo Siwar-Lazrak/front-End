@@ -36,11 +36,9 @@
                     <nz-form-label [nzSpan]="6" nzFor="sousmodule">Sous-Module</nz-form-label>
                     <nz-form-control [nzSpan]="14">
                         <select [(ngModel)]="sousmodu" name="sousmodu" nzShowSearch nzAllowClear nzPlaceHolder="Select sous module">
-                            <option></option>
-                            <option *ngFor="let mysousmodul of sousModule" id="idSousModule"
-                                value="{{mysousmodul.idSousModule}}">
-                                {{ mysousmodul.nomSousModule }}
-                            </option>
+                            <option *ngFor="let sousmodule of sousModule" id="idSousModule"  value="{{sousmodule.idSousModule}}">
+                                {{sousmodule.nomSousModule}}
+                            </option>                          
                         </select>
                     </nz-form-control>
                 </nz-form-item>
@@ -68,7 +66,7 @@
                         <td>{{ data.address }}</td>
                         <td>
 
-                            <a (click)="showModal()"><i nz-icon nzType="file-add" nzTheme="outline"></i></a>
+                            <a (click)="createTplModal(tplTitle, tplContent, tplFooter)"><i nz-icon nzType="file-add" nzTheme="outline"></i></a>
                             <nz-divider nzType="vertical"></nz-divider>
                             <a><i nz-icon nzType="delete" nzTheme="twotone"></i></a>
                         </td>
@@ -90,7 +88,7 @@
                                 <td>{{ data.age }}</td>
                                 <td>{{ data.address }}</td>
                                 <td>
-                                    <a (click)="createTplModal(tplTitle, tplContent, tplFooter)"><i nz-icon nzType="file-add"
+                                    <a><i nz-icon nzType="file-add"
                                 nzTheme="outline"></i></a>
                                     <nz-divider nzType="vertical"></nz-divider>
                                     <a><i nz-icon nzType="delete" nzTheme="twotone"></i></a>
@@ -128,8 +126,8 @@
         </button>
     </div>
 </nz-content>
-<nz-modal [(nzVisible)]="isVisible" nzTitle="Abscisse X" (nzOnCancel)="handleCancell()" (click)="handleAdd()" [nzOkLoading]="isOkLoading">
-    <form nz-form style="padding-left: 120px;">
+<!-- <nz-modal [(nzVisible)]="isVisible" nzTitle="Abscisse X" (nzOnCancel)="handleCancell()" (click)="handleAdd()" [nzOkLoading]="isOkLoading">
+    <form nz-form style="padding-left: 120px;" (ngSubmit)="onSubmit()" name="form2">
         <nz-form-item>
             <nz-form-label [nzSpan]="6" nzFor="table"><a>Tables</a></nz-form-label>
             <nz-form-control [nzSpan]="14">
@@ -154,48 +152,77 @@
         <nz-form-item>
             <nz-form-label [nzSpan]="6" nzFor="fieldname"><a>Filed Name</a></nz-form-label>
             <nz-form-control [nzSpan]="14">
-                <input nz-input placeholder="Filed Name" [(ngModel)]="value" />
+                <input nz-input placeholder="Filed Name" name="fieldname" [(ngModel)]="xabscisse.fieldname" />
             </nz-form-control>
         </nz-form-item>
         <nz-form-item>
-            <nz-form-label [nzSpan]="6" nzFor="repportname"><a>Reporting Name</a></nz-form-label>
+            <nz-form-label [nzSpan]="6" nzFor="fieldreporting"><a>Reporting Name</a></nz-form-label>
             <nz-form-control [nzSpan]="14">
-                <input nz-input placeholder="Reporting Name" [(ngModel)]="value" />
+                <input nz-input placeholder="Reporting Name" name="fieldreporting" [(ngModel)]="xabscisse.fieldreporting" />
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label [nzSpan]="6" nzFor="sousmodule">Sous-Module</nz-form-label>
+            <nz-form-control [nzSpan]="14">
+                <select [(ngModel)]="raport" name="raport" nzShowSearch nzAllowClear nzPlaceHolder="Select sous module">
+                    <option *ngFor="let rappot of rapport" id="idSousModule"  value="{{rappot.idRapport}}">
+                        {{rappot.nomRapport}}
+                    </option>                          
+                </select>
             </nz-form-control>
         </nz-form-item>
     </form>
 </nz-modal>
-
+ -->
 <ng-template #tplTitle>
-    <span>New Y</span>
+    <span>New X</span>
 </ng-template>
 <ng-template #tplContent>
-    <!--  <form nz-form style="padding-left: 120px;">
+    <form nz-form style="padding-left: 120px;" (ngSubmit)="onSubmit()" name="form2">
         <nz-form-item>
+            <nz-form-label [nzSpan]="6" nzFor="table"><a>Tables</a></nz-form-label>
             <nz-form-control [nzSpan]="14">
-                <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a person" [(ngModel)]="selectedValue">
-                    <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
-                    <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
-                    <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
-                </nz-select>
+                <select [(ngModel)]="xabscisse.tablerep" name="tables" id="tables" (change)="getColumn($event)">
+                    <option *ngFor="let mytable of table" value="{{mytable.tableName}}">
+
+                        {{ mytable.tableName }}
+                    </option>
+                </select>
             </nz-form-control>
         </nz-form-item>
         <nz-form-item>
-            <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
-
+            <nz-form-label [nzSpan]="6" nzFor="column"><a>Lignes</a></nz-form-label>
+            <nz-form-control [nzSpan]="14">
+                <select [(ngModel)]="xabscisse.idfield" name="column" id="column">
+                    <option *ngFor="let column of columns" value="{{column.colName}}">
+                        {{ column.colName }}
+                    </option>
+                </select>
+            </nz-form-control>
         </nz-form-item>
-
-    </form> -->
-    <div class="inner-content">
-        <div nz-col [nzSpan]="18" [nzPush]="6">
-            col-18 col-push-6
-        </div>
-        <nz-divider nzType="vertical"></nz-divider>
-
-        <div nz-col [nzSpan]="6" [nzPull]="18">
-            col-6 col-pull-18
-        </div>
-    </div>
+        <nz-form-item>
+            <nz-form-label [nzSpan]="6" nzFor="fieldname"><a>Filed Name</a></nz-form-label>
+            <nz-form-control [nzSpan]="14">
+                <input nz-input placeholder="Filed Name" name="fieldname" [(ngModel)]="xabscisse.fieldname" />
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label [nzSpan]="6" nzFor="fieldreporting"><a>Reporting Name</a></nz-form-label>
+            <nz-form-control [nzSpan]="14">
+                <input nz-input placeholder="Reporting Name" name="fieldreporting" [(ngModel)]="xabscisse.fieldreporting" />
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label [nzSpan]="6" nzFor="sousmodule">Sous-Module</nz-form-label>
+            <nz-form-control [nzSpan]="14">
+                <select [(ngModel)]="raport" name="raport" nzShowSearch nzAllowClear nzPlaceHolder="Select sous module">
+                    <option *ngFor="let rappot of rapport" id="idSousModule"  value="{{rappot.idRapport}}">
+                        {{rappot.nomRapport}}
+                    </option>                          
+                </select>
+            </nz-form-control>
+        </nz-form-item>
+    </form>
 
 
 </ng-template>

@@ -157,4 +157,8 @@ getTablesColumns(tableName): Observable<any> {
   return this.http.get(API_URL + `getTablesColumns?tableName=${tableName}`, httpOptions );
 }
 
+// <!--Xabscisse-->
+createXabscisse(Xabscisse, idRapport): Observable<any> {
+  return this.http.post(`http://localhost:8080/api/test/createXabscisse/${idRapport}`, Xabscisse);
+}
 }

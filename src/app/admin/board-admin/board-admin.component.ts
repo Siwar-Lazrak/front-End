@@ -41,7 +41,6 @@ export class BoardAdminComponent implements OnInit {
     nomRapport: '',
     title: '',
     chartType: '',
-    descriptionRapport: '',
      idSousModule: null,
      sousmodule: null,
    };
