@@ -2,7 +2,7 @@
     <nz-header>
         <div class="logo">
             <a (click)="open()">
-                <img alt="logo" src="assets\logoelite.jpg" style="width: 63px; border-radius: 50px; margin-left: 10px; margin-top: 5px; margin-bottom: 25px;">
+                <img alt="logo" class="avatar" src="assets\logoelite.jpg">
             </a>
         </div>
 
@@ -17,184 +17,236 @@
             <div nz-row style="margin-bottom: 50px;">
                 <div nz-col [nzSpan]="18" [nzPush]="6" style="display: inline-block;">
                     <div nz-row nzType="flex" nzJustify="end">
-                        <div nz-col [nzSpan]="2" style="padding-left: 1%;">
 
+                        <div nz-col [nzSpan]="4" style="padding-left: 1%;">
+                            <li nz-submenu nzTitle="Module" nzIcon="setting" routerLink="moduleadmin">
+                                <span *ngFor="let access of useraccess">
+                                    <span *ngIf="(access.user['id'] === this.id)"> 
+                                    <span *ngFor="let sousmodule of sousModule">
+                                        <span *ngIf="access.sousmodule['idSousModule'] === sousmodule.idSousModule">
+                                <ul >
+                                    <li nz-menu-group nzTitle="{{ sousmodule.module['nom']}}">
 
+                                    </li>
+                                </ul>
+                            </span>
+                                </span>
+                                </span>
+                                </span>
+                            </li>
                         </div>
                         <div nz-col [nzSpan]="4" style="padding-left: 1%;">
-                            <nz-time-picker [(ngModel)]="time"></nz-time-picker>
-                        </div>
+                            <li nz-submenu nzTitle="Sous-Module" nzIcon="setting" routerLink="sousmoduleAdmin">
+                                <span *ngFor="let access of useraccess">
+                                    <span *ngIf="(access.user['id'] === this.id)"> 
+                                    <span *ngFor="let sousmodule of sousModule">
+                                        <span *ngIf="access.sousmodule['idSousModule'] === sousmodule.idSousModule">
+                                <ul>
+                                    <li nz-menu-group nzTitle="{{access.sousmodule['nomSousModule']}}">
 
-                        <div nz-col [nzSpan]="2">
-                            <nz-button-group nzSpan="4" nzPlacement="bottomLeft" nz-popover nzPopoverTitle="" [nzPopoverContent]="contentTemplate" nzPopoverPlacement="bottomLeft">
-                                <span role="img" aria-label="bell" class="anticon anticon-bell antd-pro-components-notice-icon-index-icon">
+                                    </li>
+
+                                </ul>
+                                </span>
+                                </span>
+                                </span>
+                                </span>
+                            </li>
+                        </div>
+                        <div nz-col [nzSpan]="4" style="padding-left: 1%;">
+                            <li nz-submenu nzTitle="Rapport" nzIcon="setting" routerLink="rapport">
+                                <span *ngFor="let access of useraccess">
+                                    <span *ngIf="(access.user['id'] === this.id)"> 
+                                    <span *ngFor="let sousmodule of sousModule">
+                                        <span *ngIf="access.sousmodule['idSousModule'] === sousmodule.idSousModule">
+                                            <ul *ngFor="let rapport of rapport">
+                                                <span *ngIf="rapport.sousmodule['idSousModule'] == access.sousmodule['idSousModule']">
+                            
+                                                <li nz-menu-item> {{rapport.nomRapport }}</li>
+                                                </span>
+        </ul>
+        </span>
+        </span>
+        </span>
+        </span>
+        </li>
+        </div>
+
+        <div nz-col [nzSpan]="4" style="padding-left: 1%;">
+            <nz-time-picker [(ngModel)]="time"></nz-time-picker>
+        </div>
+        <!-- notification -->
+        <div nz-col [nzSpan]="2">
+            <nz-button-group nzSpan="4" nzPlacement="bottomLeft" nz-popover nzPopoverTitle="" [nzPopoverContent]="contentTemplate" nzPopoverPlacement="bottomLeft">
+                <span role="img" aria-label="bell" class="anticon anticon-bell antd-pro-components-notice-icon-index-icon">
                                     <svg viewBox="64 64 896 896" focusable="false" class="" data-icon="bell" style="width: 30px; margin-top: 18px; color: rgb(5, 5, 112);"  fill="currentColor" aria-hidden="true">
                                         <path d="M816 768h-24V428c0-141.1-104.3-257.7-240-277.1V112c0-22.1-17.9-40-40-40s-40 17.9-40 40v38.9c-135.7 19.4-240 136-240 277.1v340h-24c-17.7 0-32 14.3-32 32v32c0 4.4 3.6 8 8 8h216c0 61.8 50.2 112 112 112s112-50.2 112-112h216c4.4 0 8-3.6 8-8v-32c0-17.7-14.3-32-32-32zM512 888c-26.5 0-48-21.5-48-48h96c0 26.5-21.5 48-48 48zM304 768V428c0-55.6 21.6-107.8 60.9-147.1S456.4 220 512 220c55.6 0 107.8 21.6 147.1 60.9S720 372.4 720 428v340H304z">
                                         </path>
                                     </svg>
                                 </span>
-                            </nz-button-group>
-                            <ng-template #contentTemplate>
-                                <ul class="ant-list-items">
-                                    <li class="ant-list-item antd-pro-components-notice-icon-notice-list-item">
-                                        <div class="ant-list-item-meta antd-pro-components-notice-icon-notice-list-meta">
-                                            <div class="ant-list-item-meta-avatar">
-                                                <span class="ant-avatar antd-pro-components-notice-icon-notice-list-avatar ant-avatar-circle ant-avatar-image">
+            </nz-button-group>
+            <ng-template #contentTemplate>
+                <ul class="ant-list-items">
+                    <li class="ant-list-item antd-pro-components-notice-icon-notice-list-item">
+                        <div class="ant-list-item-meta antd-pro-components-notice-icon-notice-list-meta">
+                            <div class="ant-list-item-meta-avatar">
+                                <span class="ant-avatar antd-pro-components-notice-icon-notice-list-avatar ant-avatar-circle ant-avatar-image">
                                                     <img src="https://gw.alipayobjects.com/zos/rmsportal/ThXAXghbEsBCCSDihZxY.png"></span></div>
-                                            <div class="ant-list-item-meta-content">
-                                                <h4 class="ant-list-item-meta-title">
-                                                    <div class="antd-pro-components-notice-icon-notice-list-title">
-                                                        <font style="vertical-align: inherit;">
-                                                            <font style="vertical-align: inherit;"></font>
-                                                        </font>
-                                                        <div class="antd-pro-components-notice-icon-notice-list-extra"></div>
-                                                    </div>
-                                                </h4>
-                                                <div class="ant-list-item-meta-description">
-                                                    <div>
-                                                        <div class="antd-pro-components-notice-icon-notice-list-description"></div>
-                                                        <div class="antd-pro-components-notice-icon-notice-list-datetime">
-                                                            <font style="vertical-align: inherit;">
-                                                                <font style="vertical-align: inherit;"></font>
-                                                            </font>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                            <div class="ant-list-item-meta-content">
+                                <h4 class="ant-list-item-meta-title">
+                                    <div class="antd-pro-components-notice-icon-notice-list-title">
+                                        <font style="vertical-align: inherit;">
+                                            <font style="vertical-align: inherit;"></font>
+                                        </font>
+                                        <div class="antd-pro-components-notice-icon-notice-list-extra"></div>
+                                    </div>
+                                </h4>
+                                <div class="ant-list-item-meta-description">
+                                    <div>
+                                        <div class="antd-pro-components-notice-icon-notice-list-description"></div>
+                                        <div class="antd-pro-components-notice-icon-notice-list-datetime">
+                                            <font style="vertical-align: inherit;">
+                                                <font style="vertical-align: inherit;"></font>
+                                            </font>
                                         </div>
-                                    </li>
-                                    <li class="ant-list-item antd-pro-components-notice-icon-notice-list-item">
-                                        <div class="ant-list-item-meta antd-pro-components-notice-icon-notice-list-meta">
-                                            <div class="ant-list-item-meta-avatar"><span class="ant-avatar antd-pro-components-notice-icon-notice-list-avatar ant-avatar-circle ant-avatar-image"><img src="https://gw.alipayobjects.com/zos/rmsportal/OKJXDXrmkNshAMvwtvhu.png"></span></div>
-                                            <div class="ant-list-item-meta-content">
-                                                <h4 class="ant-list-item-meta-title">
-                                                    <div class="antd-pro-components-notice-icon-notice-list-title">
-                                                        <font style="vertical-align: inherit;">
-                                                            <font style="vertical-align: inherit;"></font>
-                                                        </font>
-                                                        <div class="antd-pro-components-notice-icon-notice-list-extra"></div>
-                                                    </div>
-                                                </h4>
-                                                <div class="ant-list-item-meta-description">
-                                                    <div>
-                                                        <div class="antd-pro-components-notice-icon-notice-list-description"></div>
-                                                        <div class="antd-pro-components-notice-icon-notice-list-datetime">
-                                                            <font style="vertical-align: inherit;">
-                                                                <font style="vertical-align: inherit;"></font>
-                                                            </font>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="ant-list-item antd-pro-components-notice-icon-notice-list-item antd-pro-components-notice-icon-notice-list-read">
-                                        <div class="ant-list-item-meta antd-pro-components-notice-icon-notice-list-meta">
-                                            <div class="ant-list-item-meta-avatar"><span class="ant-avatar antd-pro-components-notice-icon-notice-list-avatar ant-avatar-circle ant-avatar-image"><img src="https://gw.alipayobjects.com/zos/rmsportal/kISTdvpyTAhtGxpovNWd.png"></span></div>
-                                            <div class="ant-list-item-meta-content">
-                                                <h4 class="ant-list-item-meta-title">
-                                                    <div class="antd-pro-components-notice-icon-notice-list-title">
-                                                        <font style="vertical-align: inherit;">
-                                                            <font style="vertical-align: inherit;"></font>
-                                                        </font>
-                                                        <div class="antd-pro-components-notice-icon-notice-list-extra"></div>
-                                                    </div>
-                                                </h4>
-                                                <div class="ant-list-item-meta-description">
-                                                    <div>
-                                                        <div class="antd-pro-components-notice-icon-notice-list-description"></div>
-                                                        <div class="antd-pro-components-notice-icon-notice-list-datetime">
-                                                            <font style="vertical-align: inherit;">
-                                                                <font style="vertical-align: inherit;"></font>
-                                                            </font>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="ant-list-item antd-pro-components-notice-icon-notice-list-item">
-                                        <div class="ant-list-item-meta antd-pro-components-notice-icon-notice-list-meta">
-                                            <div class="ant-list-item-meta-avatar"><span class="ant-avatar antd-pro-components-notice-icon-notice-list-avatar ant-avatar-circle ant-avatar-image"><img src="https://gw.alipayobjects.com/zos/rmsportal/GvqBnKhFgObvnSGkDsje.png"></span></div>
-                                            <div class="ant-list-item-meta-content">
-                                                <h4 class="ant-list-item-meta-title">
-                                                    <div class="antd-pro-components-notice-icon-notice-list-title">
-                                                        <font style="vertical-align: inherit;">
-                                                            <font style="vertical-align: inherit;"></font>
-                                                        </font>
-                                                        <div class="antd-pro-components-notice-icon-notice-list-extra"></div>
-                                                    </div>
-                                                </h4>
-                                                <div class="ant-list-item-meta-description">
-                                                    <div>
-                                                        <div class="antd-pro-components-notice-icon-notice-list-description"></div>
-                                                        <div class="antd-pro-components-notice-icon-notice-list-datetime">
-                                                            <font style="vertical-align: inherit;">
-                                                                <font style="vertical-align: inherit;"></font>
-                                                            </font>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="ant-list-item antd-pro-components-notice-icon-notice-list-item">
-                                        <div class="ant-list-item-meta antd-pro-components-notice-icon-notice-list-meta">
-                                            <div class="ant-list-item-meta-avatar"><span class="ant-avatar antd-pro-components-notice-icon-notice-list-avatar ant-avatar-circle ant-avatar-image"><img src="https://gw.alipayobjects.com/zos/rmsportal/ThXAXghbEsBCCSDihZxY.png"></span></div>
-                                            <div class="ant-list-item-meta-content">
-                                                <h4 class="ant-list-item-meta-title">
-                                                    <div class="antd-pro-components-notice-icon-notice-list-title">
-                                                        <font style="vertical-align: inherit;">
-                                                            <font style="vertical-align: inherit;"></font>
-                                                        </font>
-                                                        <div class="antd-pro-components-notice-icon-notice-list-extra"></div>
-                                                    </div>
-                                                </h4>
-                                                <div class="ant-list-item-meta-description">
-                                                    <div>
-                                                        <div class="antd-pro-components-notice-icon-notice-list-description"></div>
-                                                        <div class="antd-pro-components-notice-icon-notice-list-datetime">
-                                                            <font style="vertical-align: inherit;">
-                                                                <font style="vertical-align: inherit;"></font>
-                                                            </font>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-
-                            </ng-template>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div nz-col [nzSpan]="2" *ngIf="isLoggedIn">
-                            <nz-button-group nzSpan="4" nzPlacement="bottomRight" nz-popover nzPopoverTitle="" [nzPopoverContent]="contentTemplate" nzPopoverPlacement="bottomRight">
-                                <img src="assets\siwar.jpg" alt="Avatar" class="avatar">
-                            </nz-button-group>
-                            <ng-template #contentTemplate>
-                                <div class="avatarStyle">
-                                    <ul class="demo">
-                                        <li style="padding-left: 18%"><img src="assets\siwar.jpg" alt="Avatar" class="avatar" style="width: 100px; height: 100px; "></li>
-                                        <li style="padding-left: 28%"><span nz-text><mark> <a nz-title>{{username}}</a></mark></span></li>
-                                        <li style="padding-left: 4%"><span nz-text nzType="secondary">{{email}}</span></li>
-                                        <nz-divider></nz-divider>
-                                        <li><label nz-radio-button nzValue="large" routerLink="profile">
+                    </li>
+                    <li class="ant-list-item antd-pro-components-notice-icon-notice-list-item">
+                        <div class="ant-list-item-meta antd-pro-components-notice-icon-notice-list-meta">
+                            <div class="ant-list-item-meta-avatar"><span class="ant-avatar antd-pro-components-notice-icon-notice-list-avatar ant-avatar-circle ant-avatar-image"><img src="https://gw.alipayobjects.com/zos/rmsportal/OKJXDXrmkNshAMvwtvhu.png"></span></div>
+                            <div class="ant-list-item-meta-content">
+                                <h4 class="ant-list-item-meta-title">
+                                    <div class="antd-pro-components-notice-icon-notice-list-title">
+                                        <font style="vertical-align: inherit;">
+                                            <font style="vertical-align: inherit;"></font>
+                                        </font>
+                                        <div class="antd-pro-components-notice-icon-notice-list-extra"></div>
+                                    </div>
+                                </h4>
+                                <div class="ant-list-item-meta-description">
+                                    <div>
+                                        <div class="antd-pro-components-notice-icon-notice-list-description"></div>
+                                        <div class="antd-pro-components-notice-icon-notice-list-datetime">
+                                            <font style="vertical-align: inherit;">
+                                                <font style="vertical-align: inherit;"></font>
+                                            </font>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="ant-list-item antd-pro-components-notice-icon-notice-list-item antd-pro-components-notice-icon-notice-list-read">
+                        <div class="ant-list-item-meta antd-pro-components-notice-icon-notice-list-meta">
+                            <div class="ant-list-item-meta-avatar"><span class="ant-avatar antd-pro-components-notice-icon-notice-list-avatar ant-avatar-circle ant-avatar-image"><img src="https://gw.alipayobjects.com/zos/rmsportal/kISTdvpyTAhtGxpovNWd.png"></span></div>
+                            <div class="ant-list-item-meta-content">
+                                <h4 class="ant-list-item-meta-title">
+                                    <div class="antd-pro-components-notice-icon-notice-list-title">
+                                        <font style="vertical-align: inherit;">
+                                            <font style="vertical-align: inherit;"></font>
+                                        </font>
+                                        <div class="antd-pro-components-notice-icon-notice-list-extra"></div>
+                                    </div>
+                                </h4>
+                                <div class="ant-list-item-meta-description">
+                                    <div>
+                                        <div class="antd-pro-components-notice-icon-notice-list-description"></div>
+                                        <div class="antd-pro-components-notice-icon-notice-list-datetime">
+                                            <font style="vertical-align: inherit;">
+                                                <font style="vertical-align: inherit;"></font>
+                                            </font>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="ant-list-item antd-pro-components-notice-icon-notice-list-item">
+                        <div class="ant-list-item-meta antd-pro-components-notice-icon-notice-list-meta">
+                            <div class="ant-list-item-meta-avatar"><span class="ant-avatar antd-pro-components-notice-icon-notice-list-avatar ant-avatar-circle ant-avatar-image"><img src="https://gw.alipayobjects.com/zos/rmsportal/GvqBnKhFgObvnSGkDsje.png"></span></div>
+                            <div class="ant-list-item-meta-content">
+                                <h4 class="ant-list-item-meta-title">
+                                    <div class="antd-pro-components-notice-icon-notice-list-title">
+                                        <font style="vertical-align: inherit;">
+                                            <font style="vertical-align: inherit;"></font>
+                                        </font>
+                                        <div class="antd-pro-components-notice-icon-notice-list-extra"></div>
+                                    </div>
+                                </h4>
+                                <div class="ant-list-item-meta-description">
+                                    <div>
+                                        <div class="antd-pro-components-notice-icon-notice-list-description"></div>
+                                        <div class="antd-pro-components-notice-icon-notice-list-datetime">
+                                            <font style="vertical-align: inherit;">
+                                                <font style="vertical-align: inherit;"></font>
+                                            </font>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="ant-list-item antd-pro-components-notice-icon-notice-list-item">
+                        <div class="ant-list-item-meta antd-pro-components-notice-icon-notice-list-meta">
+                            <div class="ant-list-item-meta-avatar"><span class="ant-avatar antd-pro-components-notice-icon-notice-list-avatar ant-avatar-circle ant-avatar-image"><img src="https://gw.alipayobjects.com/zos/rmsportal/ThXAXghbEsBCCSDihZxY.png"></span></div>
+                            <div class="ant-list-item-meta-content">
+                                <h4 class="ant-list-item-meta-title">
+                                    <div class="antd-pro-components-notice-icon-notice-list-title">
+                                        <font style="vertical-align: inherit;">
+                                            <font style="vertical-align: inherit;"></font>
+                                        </font>
+                                        <div class="antd-pro-components-notice-icon-notice-list-extra"></div>
+                                    </div>
+                                </h4>
+                                <div class="ant-list-item-meta-description">
+                                    <div>
+                                        <div class="antd-pro-components-notice-icon-notice-list-description"></div>
+                                        <div class="antd-pro-components-notice-icon-notice-list-datetime">
+                                            <font style="vertical-align: inherit;">
+                                                <font style="vertical-align: inherit;"></font>
+                                            </font>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+            </ng-template>
+        </div>
+        <div nz-col [nzSpan]="2" *ngIf="isLoggedIn">
+            <nz-button-group nzSpan="4" nzPlacement="bottomRight" nz-popover nzPopoverTitle="" [nzPopoverContent]="contentTemplate" nzPopoverPlacement="bottomRight">
+                <img src="assets\siwar.jpg" alt="Avatar" class="avatar">
+            </nz-button-group>
+            <ng-template #contentTemplate>
+                <div class="avatarStyle">
+                    <ul class="demo">
+                        <li style="padding-left: 18%"><img src="assets\siwar.jpg" alt="Avatar" class="avatar" style="width: 100px; height: 100px; "></li>
+                        <li style="padding-left: 28%"><span nz-text><mark> <a nz-title>{{username}}</a></mark></span></li>
+                        <li style="padding-left: 4%"><span nz-text nzType="secondary">{{email}}</span></li>
+                        <nz-divider></nz-divider>
+                        <li><label nz-radio-button nzValue="large" routerLink="profile">
                                 <i nz-icon nzType="solution"></i>
                                 Gérer votre profile</label></li>
-                                        <nz-divider></nz-divider>
-                                        <li style="padding-left: 12%"><label class="deconnexionStyle" nz-radio-button nzValue="large" nzType="primary" (click)="logout()">
+                        <nz-divider></nz-divider>
+                        <li style="padding-left: 12%"><label class="deconnexionStyle" nz-radio-button nzValue="large" nzType="primary" (click)="logout()">
                                 <i nz-icon nzType="poweroff" nzTheme="outline"></i>
                                 Déconnexion</label></li>
-                                    </ul>
-                                </div>
-                            </ng-template>
-                        </div>
-                    </div>
+                    </ul>
                 </div>
-                <div nz-col [nzSpan]="4" [nzPull]="18">
-                    <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'" (click)="isCollapsed = !isCollapsed"></i>
-                </div>
-            </div>
+            </ng-template>
+        </div>
+
+        </div>
+        </div>
+        <div nz-col [nzSpan]="4" [nzPull]="18">
+            <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'" (click)="isCollapsed = !isCollapsed"></i>
+        </div>
+        </div>
         </ul>
     </nz-header>
     <nz-layout>
@@ -204,28 +256,27 @@
                     <i nz-icon nzType="dashboard" nzTheme="outline"></i>
                     <span>Dashboard</span>
                 </li>
-                <li nz-submenu nzTitle="User" nzIcon="user">
+                <span *ngFor="let access of useraccess">
+                <span *ngIf="(access.user['id'] === this.id)"> 
+                <span *ngFor="let sousmodule of sousModule">
+                    <span *ngIf="access.sousmodule['idSousModule'] === sousmodule.idSousModule">
+                <li nz-submenu  nzTitle="{{ sousmodule.module['nom']}}" nzIcon="appstore">                
                     <ul>
-                        <li nz-menu-item routerLink="add-users">
-                            <i nz-icon nzType="user-add" nzTheme="outline"></i>Add-User</li>
+                       
+                        <li nz-submenu nzIcon="appstore-add" nzTitle="{{access.sousmodule['nomSousModule']}}">
+                            <ul *ngFor="let rapport of rapport">
+                                <span *ngIf="rapport.sousmodule['idSousModule'] == access.sousmodule['idSousModule']">
 
-                        <li nz-menu-item routerLink="access">
-                            <i nz-icon nzType="group" nzTheme="outline"></i>Access-User</li>
-                    </ul>
-                </li>
-                <li nz-menu-item routerLink="moduleadmin">
-                    <i nz-icon nzType="appstore-add" nzTheme="outline"></i>
-                    <span>Module</span>
-                </li>
-
-                <li nz-menu-item routerLink="sousmoduleAdmin">
-                    <i nz-icon nzType="cluster" nzTheme="outline"></i>
-                    <span>Sous-Module</span>
-                </li>
-                <li nz-menu-item>
-                    <i nz-icon nzType="file"></i>
-                    <span>File</span>
-                </li>
+                                <li nz-menu-item> {{rapport.nomRapport }}</li>
+                                </span>
+            </ul>
+            </li>
+            </ul>
+            </li>
+            </span>
+            </span>
+            </span>
+            </span>
             </ul>
         </nz-sider>
         <nz-layout class="inner-layout">
@@ -239,11 +290,47 @@
                             <span class="ant-breadcrumb-separator">/</span></span>
                             <span><span class="ant-breadcrumb-link"><span>Card List</span></span>
                             <span class="ant-breadcrumb-separator">
-                                <font style="vertical-align: inherit;">
-                                <font style="vertical-align: inherit;">/</font></font>
-                            </span>
-                            </span>
+                <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">/</font></font></span></span>
                         </div>
+                    </div>
+                    <div style="margin-left: 20px;">
+
+                        <!-- <div nz-row [nzGutter]="8">
+                            <div nz-col [nzSpan]="8" style="padding: auto;">
+                                <nz-card nz-card-grid style="width:300px; height: 155px;" nzTitle="Module" [nzExtra]="extraTemplate">
+
+                                    <p>
+                                        <nz-progress [nzPercent]="this.modulenb" [nzStrokeColor]="{ '0%': '#108ee9', '100%': '#87d068' }" nzStatus="active"></nz-progress>
+                                    </p>
+
+                                </nz-card>
+                                <ng-template #extraTemplate>
+                                    <i nz-icon nzType="info-circle" nzTheme="outline" routerLink="module"></i>
+                                </ng-template>
+                            </div>
+                            <div nz-col [nzSpan]="8" style="padding: auto;">
+                                <nz-card nz-card-grid style="width:300px; height: 155px;" nzTitle="Sous-Module" [nzExtra]="extraTemplatesousmodule">
+                                    <p>
+                                        <nz-progress [nzPercent]="this.countsousModule" [nzStrokeColor]="{ '0%': '#108ee9', '100%': '#87d068' }" nzStatus="active"></nz-progress>
+                                    </p>
+                                </nz-card>
+                                <ng-template #extraTemplatesousmodule>
+                                    <i nz-icon nzType="info-circle" nzTheme="outline" routerLink="soumod"></i>
+                                </ng-template>
+                            </div>
+                            <div nz-col [nzSpan]="8" style="padding: auto;">
+                                <nz-card nz-card-grid style="width:300px; height: 155px;" nzTitle="Rapport" [nzExtra]="extraTemplaterapport">
+                                    <p>
+                                        <nz-progress [nzPercent]="this.nb" [nzStrokeColor]="{ '0%': '#108ee9', '100%': '#87d068' }" nzStatus="active"></nz-progress>
+                                    </p>
+                                </nz-card>
+                                <ng-template #extraTemplaterapport>
+                                    <i nz-icon nzType="info-circle" nzTheme="outline" routerLink="rapport"></i>
+                                </ng-template>
+
+                            </div>
+                        </div> -->
                     </div>
                 </div>
             </div>

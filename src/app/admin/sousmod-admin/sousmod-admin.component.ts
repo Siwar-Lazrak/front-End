@@ -27,7 +27,7 @@ modulee: number;
     nom: '',
     description: '',
   };
-
+  soumodule: SousModule[];
   confirmModal: NzModalRef;
   tplModal: NzModalRef;
   tplModalButtonLoading = false;
@@ -51,9 +51,10 @@ id: any;
   sousModule: SousModule[];
   module: Module[];
   isVisible = false;
+  visible = false;
+  searchValue = '';
   isConfirmLoading = false;
   mapOfExpandData: { [key: string]: boolean } = {};
-
   // tslint:disable-next-line:max-line-length
   constructor(private modalService: NzModalService, private userService: UserService, private tokenStorage: TokenStorageService, private router: Router, private route: ActivatedRoute ) { }
   expandSet = new Set<number>();
@@ -63,6 +64,15 @@ onExpandChange(id: number, checked: boolean): void {
   } else {
     this.expandSet.delete(id);
   }
+}
+reset(): void {
+  this.searchValue = '';
+  this.search();
+}
+
+search(): void {
+  this.visible = false;
+  this.soumodule = this.soumodule.filter((item: SousModule) => item.nomSousModule.indexOf(this.searchValue) !== -1);
 }
   showModal(): void {
     this.isVisible = true;

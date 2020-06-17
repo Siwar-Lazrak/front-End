@@ -9,6 +9,8 @@ import { SousModule } from 'src/app/Model/sousModule';
 import { Useraccess } from 'src/app/Model/Useraccess';
 import { Rapport } from 'src/app/Model/Rapport';
 import { Tables } from '../Model/Tables';
+import { Xabscisse } from '../Model/Xabscisse';
+import { Yabscisse } from '../Model/Yabscisse';
 
 const API_URL = 'http://localhost:8080/api/test/';
 const baseUrl = 'http://localhost:8080/api/test';
@@ -128,6 +130,7 @@ getAccessList(): Observable<any> {
 createRapport(rapport, idSousModule): Observable<any> {
   return this.http.post(`http://localhost:8080/api/test/createRapport/${idSousModule}`, rapport);
 }
+
 getRapportList(): Observable<any> {
   return this.http.get<Rapport>(API_URL + 'getAllRapport', httpOptions );
 }
@@ -156,9 +159,21 @@ getAlltables(): Observable<any> {
 getTablesColumns(tableName): Observable<any> {
   return this.http.get(API_URL + `getTablesColumns?tableName=${tableName}`, httpOptions );
 }
-
 // <!--Xabscisse-->
-createXabscisse(Xabscisse, idRapport): Observable<any> {
-  return this.http.post(`http://localhost:8080/api/test/createXabscisse/${idRapport}`, Xabscisse);
+createXabscisse(xabscisse, idRapport: number): Observable<any> {
+  return this.http.post(`http://localhost:8080/api/test/createXabscisse/${idRapport}`, xabscisse);
+}
+getAllXabscisse(): Observable<any> {
+  return this.http.get<Xabscisse>(API_URL + 'getAllxabscisse', httpOptions );
+}
+getXabscisseId(idX): Observable<any> {
+  return this.http.get(`${baseUrl}/getxabscisseId/${idX}`);
+}
+// <!--Yabscisse-->
+getAllYabscisse(): Observable<any> {
+  return this.http.get<Yabscisse>(API_URL + 'getAllyabscisse', httpOptions );
+}
+createYabscisse(yabscisse, idX: number): Observable<any> {
+  return this.http.post(`http://localhost:8080/api/test/createYabscisse/${idX}`, yabscisse);
 }
 }

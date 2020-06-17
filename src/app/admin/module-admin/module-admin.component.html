@@ -4,7 +4,8 @@
             <font style="vertical-align: inherit;">
                 <font style="vertical-align: inherit; padding-left: 15px; text-decoration: solid;">
                     <div class="antd-pro-pages-account-settings-style-title">
-                        Liste Module
+                        <span style="padding-left: 90px;" nz-typography nzType="warning">Liste Module</span>
+
                     </div>
                 </font>
             </font>
@@ -28,7 +29,11 @@
             <tr>
                 <th nzWidth="60px"></th>
                 <th style="color: dodgerblue;">#</th>
-                <th style="color: dodgerblue;">Nom Module</th>
+                <th style="color: dodgerblue;">Nom Module
+                    <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
+                        <i nz-icon nzType="search"></i>
+                    </nz-filter-trigger>
+                </th>
                 <th style="color: dodgerblue;">Action</th>
             </tr>
         </thead>
@@ -53,6 +58,18 @@
             </ng-container>
         </tbody>
     </nz-table>
+    <nz-pagination [nzPageIndex]="1" [nzTotal]="50" style="padding-left: 650px;"></nz-pagination>
+    <nz-dropdown-menu #menu="nzDropdownMenu">
+        <div class="ant-table-filter-dropdown">
+            <div class="search-box">
+                <input type="text" nz-input placeholder="Search name" [(ngModel)]="searchValue" />
+                <button nz-button nzSize="small" nzType="primary" (click)="search()" class="search-button">
+              Search
+            </button>
+                <button nz-button nzSize="small" (click)="reset()">Reset</button>
+            </div>
+        </div>
+    </nz-dropdown-menu>
 </nz-content>
 <!-- Create -->
 <ng-template #tplTitle>

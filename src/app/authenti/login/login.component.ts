@@ -50,12 +50,18 @@ export class LoginComponent implements OnInit {
         if (this.isLoggedIn) {
           const user = this.tokenStorage.getUser();
           this.roles = user.roles;
+          const newLocal = this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
           // tslint:disable-next-line:no-conditional-assignment
           if ( this.showAdminBoard = this.roles.includes('ROLE_ADMIN')) {
             // tslint:disable-next-line:no-unused-expression
             this.router.navigate(['/admin']);
             this.username = user.username;
-          } else {
+          // tslint:disable-next-line:no-conditional-assignment
+          } else if ( this.showSuperadminBoard = this.roles.includes('ROLE_SUPERADMIN')) {
+            this.router.navigate(['/superadmin']);
+            this.username = user.username;
+          }
+          else{
             this.showUserBoard = this.roles.includes('ROLE_USER');
             this.router.navigate(['/user']);
             this.username = user.username;

@@ -40,9 +40,8 @@ import { SoumodComponent } from './soumod/soumod.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './authenti/login/login.component';
 import { ProfileComponent } from './authenti/profile/profile.component';
-import { AddUsersComponent } from './users/add-users/add-users.component';
+import { AddUsersComponent } from './superAdmin/add-users/add-users.component';
 import { ModuleComponent } from './module/module.component';
-import { AccessComponent } from './users/access/access.component';
 import { BoardUserComponent } from './user/board-user/board-user.component';
 import { RapportComponent } from './rapport/rapport.component';
 import { ModuleAdminComponent } from './admin/module-admin/module-admin.component';
@@ -53,6 +52,11 @@ import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { authInterceptorProviders } from './service/authInterceptorProviders';
 import { ForgotPassComponent } from './authenti/forgot-pass/forgot-pass.component';
 import { ResetPasswordComponent } from './authenti/reset-password/reset-password.component';
+import { BoardSuperAdminComponent } from './superAdmin/board-super-admin/board-super-admin.component';
+import { AddAccessComponent } from './superAdmin/add-access/add-access.component';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzBadgeModule } from 'ng-zorro-antd/badge';
+
 registerLocaleData(en);
 const antDesignIcons = AllIcons as {
   [key: string]: IconDefinition;
@@ -66,16 +70,17 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     HomeComponent,
     LoginComponent,
     ProfileComponent,
-    AddUsersComponent,
     ModuleComponent,
-    AccessComponent,
     BoardUserComponent,
     RapportComponent,
     ModuleAdminComponent,
     SousmodAdminComponent,
     BoardAdminComponent,
     ForgotPassComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    BoardSuperAdminComponent,
+    AddUsersComponent,
+    AddAccessComponent
   ],
   imports: [
     BrowserModule,
@@ -86,6 +91,7 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     NzProgressModule,
     NgZorroAntdModule,
     NzStepsModule,
+    NzBadgeModule,
     FormsModule,
     NzAutocompleteModule,
     NzTimePickerModule,
@@ -97,6 +103,7 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     BrowserAnimationsModule,
     ReactiveFormsModule,
     CommonModule,
+    NzSelectModule,
     ScrollingModule,
     HttpClientJsonpModule,
     NzFormModule,

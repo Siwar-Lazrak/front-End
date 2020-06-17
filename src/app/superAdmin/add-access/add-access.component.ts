@@ -1,21 +1,20 @@
+
 import { Component, OnInit, Input, TemplateRef } from '@angular/core';
 import { UserService } from 'src/app/service/user.service';
 import { UserModel } from './../../Model/UserModel';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
 import { TokenStorageService } from 'src/app/service/token-storage.service';
 import { Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NzModalService, NzModalRef } from 'ng-zorro-antd';
 import { Useraccess } from 'src/app/Model/Useraccess';
 import { SousModule } from 'src/app/Model/sousModule';
-
 @Component({
-  selector: 'app-access',
-  templateUrl: './access.component.html',
-  styleUrls: ['./access.component.scss']
+  selector: 'app-add-access',
+  templateUrl: './add-access.component.html',
+  styleUrls: ['./add-access.component.scss']
 })
-export class AccessComponent implements OnInit {
+export class AddAccessComponent implements OnInit {
   useraccess: Useraccess[];
   users: UserModel[];
   sousModule: SousModule[];
@@ -124,5 +123,6 @@ if (this.tokenStorage.getToken()) {
     this.submitted = true;
     this.destroyTplModal();
   }
+
 
 }

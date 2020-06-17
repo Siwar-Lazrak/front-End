@@ -40,3 +40,38 @@ button {
 nz-select {
     width: 200px;
 }
+
+nz-header {
+    background: #fff;
+    color: dodgerblue;
+}
+
+nz-sider {
+    background: #fff;
+    color: dodgerblue;
+    line-height: 120px;
+}
+
+nz-modal nz-content {
+    background: #fff;
+    color: dodgerblue;
+    min-height: 120px;
+    line-height: 120px;
+}
+
+nz-layout {
+    margin-bottom: 0px;
+}
+
+nz-badge {
+    margin-right: 0px;
+}
+
+.head-example {
+    width: 42px;
+    height: 42px;
+    border-radius: 4px;
+    background: #eee;
+    display: inline-block;
+    vertical-align: middle;
+}

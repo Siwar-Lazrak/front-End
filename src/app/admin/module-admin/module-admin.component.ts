@@ -9,6 +9,7 @@ import {  FormControl, FormGroup, Validators} from '@angular/forms';
 import { Useraccess } from '../../Model/Useraccess';
 import { SousModule } from '../../Model/SousModule';
 
+
 @Component({
   selector: 'app-module-admin',
   templateUrl: './module-admin.component.html',
@@ -16,7 +17,7 @@ import { SousModule } from '../../Model/SousModule';
 })
 export class ModuleAdminComponent implements OnInit {
 //  siwar
-searchText = '';
+
 moduls: Observable<Module[]>;
 deleteMessage = false;
 validateForm: FormGroup;
@@ -27,6 +28,8 @@ id: any;
 useraccess: Useraccess[];
 sousModule: SousModule[];
 countsousModule: any;
+visible = false;
+searchValue = '';
 
 
 mymodule: Module = {
@@ -35,12 +38,10 @@ mymodule: Module = {
   description: '',
 };
 
-
   module: Module[];
   isLoggedIn = false;
   modules: Module = new Module();
   submitted = false;
-
   confirmModal: NzModalRef;
   tplModal: NzModalRef;
   tplModalButtonLoading = false;
@@ -60,6 +61,15 @@ onExpandChange(id: number, checked: boolean): void {
   } else {
     this.expandSet.delete(id);
   }
+}
+reset(): void {
+  this.searchValue = '';
+  this.search();
+}
+
+search(): void {
+  this.visible = false;
+  this.module = this.module.filter((item: Module) => item.nom.indexOf(this.searchValue) !== -1);
 }
 showModal(): void {
   this.isVisible = true;
@@ -171,6 +181,7 @@ showConfirm(): void {
       }).catch(() => console.log('Oops errors!')),
   });
 }
+
 handleOk(): void {
   this.isConfirmLoading = true;
   setTimeout(() => {

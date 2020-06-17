@@ -1,38 +1,3 @@
-<!-- <nz-table #nzTable [nzData]="mymodule">
-    <thead>
-        <tr>
-            <th>
-                <button nz-button nzType="default" (click)="createTplModal(tplTitle, tplContent, tplFooter)" style="background-color: rgb(70, 70, 250);">
-                    <b>New Module</b>
-                  </button> </th>
-            <th style="color: Blue;">#</th>
-            <th style="color: Blue;">Nom Module</th>
-            <th style="color: Blue;">Action</th>
-
-        </tr>
-    </thead>
-    <tbody *ngFor="let access of useraccess">
-        <ng-template ngFor let-data [ngForOf]="sousModule">
-            <tr *ngIf="access.user['id'] === this.id && access.sousmodule['idSousModule'] == data.idSousModule">
-                <td nzShowExpand [(nzExpand)]="mapOfExpandData[data.module['idModule']]"></td>
-
-                <td>{{ data.module['idModule']}}</td>
-                <td>{{ data.module['nom']}}</td>
-                <td>
-                    <a (click)="showConfirm()" (click)="deleteModule(data.idModule)" style="color: red;">
-                    Delete
-                </a>
-                    <nz-divider nzType="vertical"></nz-divider>
-                    <a (click)="showModal()" (click)="editmodule(data)" style="color: green;">Update</a>
-                </td>
-            </tr>
-            <tr [nzExpand]="mapOfExpandData[data.module['idModule']]" *ngIf="access.user['id'] === this.id && access.sousmodule['idSousModule'] == data.idSousModule">
-                <td></td>
-                <td colspan="9" style="color: rgb(105, 170, 245);">{{ data.module['description'] }}</td>
-            </tr>
-        </ng-template>
-    </tbody>
-</nz-table> -->
 <nz-content style="background-color: white;">
 
     <div class="ant-card-head-wrapper" style="padding-left: 20px; padding-right: 20px;">

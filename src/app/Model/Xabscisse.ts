@@ -8,8 +8,7 @@ export class Xabscisse {
     operation: string;
     tablerep: string;
     idfield: string;
-    rapport: string;
     idRapport: number;
-    module: Rapport['idRapport'];
+    rapport: Rapport['idRapport'];
 
 }
