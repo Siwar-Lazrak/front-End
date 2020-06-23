@@ -32,31 +32,28 @@
                         </nz-select>
                     </nz-form-control>
                 </nz-form-item>
-
                 <nz-form-item>
-                    <nz-form-label [nzSpan]="6">Sous-Module</nz-form-label>
+                    <nz-form-label [nzSpan]="6"><a>Sous-Module</a></nz-form-label>
                     <nz-form-control [nzSpan]="14">
-                        <span *ngFor="let sousmodule of sousModule">
-                        <span *ngFor="let access of useraccess">
-                        <span *ngIf="access.sousmodule['idSousModule'] === sousmodule.idSousModule && access.user['id'] === this.id">
-
-                        <select [(ngModel)]="sousmodu" name="sousmodu" style="width: 350px;" >  
-                                                <option id="idSousModule" value="{{sousmodule.idSousModule}}"> 
-                                                    {{ sousmodule.module['nom'] }} : {{ sousmodule.nomSousModule }} 
-                                                </option>
-                                              </select>
-                                            </span>
-                        </span>
-                        </span>
-
+                        <select [(ngModel)]="sousmodu" name="sousmodu" style="width: 350px;">  
+                             <option *ngFor="let rObjuser of rObjuser" id="idSousModule" value="{{rObjuser.sousmodule['idSousModule'] }}"> 
+                                                    {{ rObjuser.sousmodule['nomSousModule'] }} 
+                             </option>
+                        </select>
                     </nz-form-control>
                 </nz-form-item>
-
             </article>
         </form>
     </div>
 
     <div class="steps-content" *ngIf="this.index == 'Second-content'" style="background-color: white; padding-left: 70px;">
+
+        <div style="padding-left: 700px;">
+            <button nz-button nzType="dashed" style="width: 260px;" nzBlock (click)="createTplModal(tplTitle, tplContent, tplFooter)"><i nz-icon nzType="plus-square" nzTheme="twotone"></i>Add X</button>
+
+            <button nz-button nzType="dashed" style="width: 260px; margin-bottom: 20px; margin-top: 20px;" nzBlock (click)="showModal1()"><i nz-icon nzType="plus-square" nzTheme="twotone"></i>Add Y</button>
+        </div>
+
         <nz-table #nzTable nzTableLayout="fixed" style="width: 1030px;">
             <thead>
                 <tr>
@@ -65,38 +62,46 @@
                     <th style="color: dodgerblue;">Name</th>
                     <th style="color: dodgerblue;">Name reporting</th>
                     <th style="color: dodgerblue;">Name Fields</th>
-                    <th style="color: dodgerblue;">Action</th>
+
+                    <!--  <th style="color: dodgerblue;">
+
+                        <a (click)="createTplModal(tplTitle, tplContent, tplFooter)"><i nz-icon nzType="plus-square" nzTheme="twotone"></i></a>
+                        <nz-divider nzType="vertical"></nz-divider>
+                        <a><i nz-icon nzType="delete" nzTheme="twotone"></i></a>
+                        <a (click)="showModal1()"><i nz-icon nzType="plus-square" nzTheme="twotone"></i></a>
+                        <nz-divider nzType="vertical"></nz-divider>
+                        <a><i nz-icon nzType="delete" nzTheme="twotone"></i></a>
+
+                    </th> -->
                 </tr>
             </thead>
-            <tbody *ngFor="let rapport of rapport">
-                <ng-container *ngFor="let xab of xabsicce">
-                    <tr *ngIf="xab.rapport['idRapport'] === rapport.idRapport">
-                        <td [nzExpand]="expandSet.has(xab.idX)" (nzExpandChange)="onExpandChange(xab.idX, $event)"></td>
-                        <td>{{xab.rapport['idRapport']}}</td>
-                        <td>{{xab.rapport['nomRapport']}}</td>
-                        <td>{{xab.fieldreporting}}</td>
-                        <td>{{xab.fieldname}}</td>
-                        <td>
-                            <a (click)="createTplModal(tplTitle, tplContent, tplFooter)"><i nz-icon nzType="plus-square" nzTheme="twotone"></i></a>
-                            <nz-divider nzType="vertical"></nz-divider>
-                            <a><i nz-icon nzType="delete" nzTheme="twotone"></i></a>
-                        </td>
+            <tbody *ngFor="let xxx of rObjX">
+                <ng-container *ngFor="let resp of rObj">
+                    <tr>
+                        <td [nzExpand]="expandSet.has(xxx.idX)" (nzExpandChange)="onExpandChange(xxx.idX, $event)"></td>
+
+                        <td>{{xxx.idX}}</td>
+                        <td>{{xxx.fieldname}}</td>
+                        <td>{{xxx.fieldreporting}}</td>
+                        <td>{{xxx.idfield}}</td>
+
                     </tr>
 
-                    <tr [nzExpand]="expandSet.has(xab.idX)">
+                    <tr [nzExpand]="expandSet.has(xxx.idX)">
 
                         <nz-table #nzTable [nzData]="" nzTableLayout="fixed">
 
-                            <tbody *ngFor="let yab of yabsicce">
-                                <tr *ngIf="xab.idX === yab.xabscisse['idX']">
-                                    <td>{{yab.idY}}</td>
-                                    <td>{{yab.fieldname}}</td>
-                                    <td>{{yab.fieldreporting}}</td>
-                                    <td>
+                            <tbody>
+                                <tr>
+                                    <td>{{resp.idY}}</td>
+                                    <td>{{resp.fieldname}}</td>
+                                    <td>{{resp.fieldreporting}}</td>
+
+                                    <!--  <td>
                                         <a (click)="showModal1()"><i nz-icon nzType="plus-square" nzTheme="twotone"></i></a>
                                         <nz-divider nzType="vertical"></nz-divider>
                                         <a><i nz-icon nzType="delete" nzTheme="twotone"></i></a>
-                                    </td>
+                                    </td> -->
 
                                 </tr>
                             </tbody>
@@ -104,6 +109,7 @@
                     </tr>
 
                 </ng-container>
+
             </tbody>
         </nz-table>
     </div>
@@ -250,10 +256,8 @@
                         <nz-page-header-subtitle>
                             <nz-list nzBordered style="width: 450px;">
                                 <nz-list-header>
-
                                     <nz-form-item>
                                         <nz-form-label [nzSpan]="6" nzFor="chartType"><a>X</a></nz-form-label>
-
                                         <nz-form-control [nzSpan]="14">
                                             <span *ngFor="let access of useraccess">
                                                 <span *ngIf="(access.user['id'] === this.id)"> 

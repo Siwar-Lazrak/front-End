@@ -6,7 +6,6 @@ import { BoardAdminComponent } from './admin/board-admin/board-admin.component';
 import { AddUsersComponent } from './superAdmin/add-users/add-users.component';
 import { SousmodAdminComponent } from './admin/sousmod-admin/sousmod-admin.component';
 import { ModuleAdminComponent } from './admin/module-admin/module-admin.component';
-import { HomeComponent } from './pages/home/home.component';
 import { BoardUserComponent } from './user/board-user/board-user.component';
 import { SoumodComponent } from './soumod/soumod.component';
 import { ModuleComponent } from './module/module.component';
@@ -15,6 +14,7 @@ import { ForgotPassComponent } from './authenti/forgot-pass/forgot-pass.componen
 import { ResetPasswordComponent } from './authenti/reset-password/reset-password.component';
 import { BoardSuperAdminComponent } from './superAdmin/board-super-admin/board-super-admin.component';
 import { AddAccessComponent } from './superAdmin/add-access/add-access.component';
+import { ErreurComponent } from './home/erreur/erreur.component';
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: LoginComponent },
   // { path: 'welcome', loadChildren: () => import('./pages/welcome/welcome.module').then(m => m.WelcomeModule) },
@@ -32,7 +32,6 @@ const routes: Routes = [
   children: [
    {path: 'sousmoduleAdmin', component: SousmodAdminComponent},
    {path: 'moduleadmin', component: ModuleAdminComponent},
-    { path: 'home', component: HomeComponent },
      {path: 'profile', component: ProfileComponent},
      { path: 'rapport', component: RapportComponent },
  ]
@@ -40,8 +39,9 @@ const routes: Routes = [
 { path: 'user', component: BoardUserComponent,
    children: [
     {path: 'profile', component: ProfileComponent},
+    {path: 'module', component: ModuleComponent},
+   // {path: 'sousmodule', component: SoumodComponent},
 
-     { path: 'home', component: HomeComponent },
 
   ]
 },
@@ -53,7 +53,12 @@ const routes: Routes = [
 
   ]
 },
-  { path: 'home', component: HomeComponent },
+{ path: 'erreur', component: ErreurComponent},
+  /* { path: 'home', component: HomeComponent,
+  children: [
+    {path: 'erreur', component: ErreurComponent},
+
+  ] }, */
 ];
 
 @NgModule({

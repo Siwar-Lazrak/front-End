@@ -147,9 +147,6 @@ export class BoardUserComponent implements OnInit {
       console.log(this.email);
       this.id = user.id;
       console.log(this.id);
-    }
-    if (this.tokenStorageService.getToken()) {
-      this.isLoggedIn = true;
       this.userService.getAccessList().subscribe(
         (data: Useraccess[]) => {
           this.useraccess = data;
@@ -159,10 +156,8 @@ export class BoardUserComponent implements OnInit {
           console.log('erreur');
         }
       );
-    }
-    if (this.tokenStorageService.getToken()) {
-            this.isLoggedIn = true;
-            this.userService.getSousmoduleList().subscribe(
+
+      this.userService.getSousmoduleList().subscribe(
               (data: SousModule[]) => {
                 this.sousModule = data;
                 this.countsousModule = data.length;
@@ -172,10 +167,8 @@ export class BoardUserComponent implements OnInit {
                 console.log('siwar');
               }
             );
-        }
-    if (this.tokenStorageService.getToken()) {
-          this.isLoggedIn = true;
-          this.userService.getUsersList().subscribe(
+
+      this.userService.getUsersList().subscribe(
         (data: UserModel[]) => {
           this.userModel = data;
           console.log(data);
@@ -186,9 +179,7 @@ export class BoardUserComponent implements OnInit {
           console.log('lazrkkk');
         }
       );
-    }
-    if (this.tokenStorageService.getToken()) {
-      this.isLoggedIn = true;
+
       this.userService.getModuleList().subscribe(
     (data: Module[]) => {
       this.module = data;
@@ -200,10 +191,8 @@ export class BoardUserComponent implements OnInit {
       console.log('lazrkkk');
     }
   );
-}
-    if (this.tokenStorageService.getToken()) {
-  this.isLoggedIn = true;
-  this.userService.getRapportList().subscribe(
+
+      this.userService.getRapportList().subscribe(
     (data: Rapport[]) => {
       this.rapport = data;
       console.log(data);
@@ -211,8 +200,12 @@ export class BoardUserComponent implements OnInit {
 
     }
   );
-}
 
+}
+else {
+  this.router.navigate(['/erreur']);
+  console.log('not auth');
+}
 
   }
   logout() {

@@ -37,7 +37,6 @@ import { NzProgressModule } from 'ng-zorro-antd/progress';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 
 import { SoumodComponent } from './soumod/soumod.component';
-import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './authenti/login/login.component';
 import { ProfileComponent } from './authenti/profile/profile.component';
 import { AddUsersComponent } from './superAdmin/add-users/add-users.component';
@@ -56,6 +55,9 @@ import { BoardSuperAdminComponent } from './superAdmin/board-super-admin/board-s
 import { AddAccessComponent } from './superAdmin/add-access/add-access.component';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
+import { ErreurComponent } from './home/erreur/erreur.component';
+import { NzResultModule } from 'ng-zorro-antd/result';
+import { WelcomeComponent } from './home/welcome/welcome.component';
 
 registerLocaleData(en);
 const antDesignIcons = AllIcons as {
@@ -67,7 +69,6 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
   declarations: [
     AppComponent,
     SoumodComponent,
-    HomeComponent,
     LoginComponent,
     ProfileComponent,
     ModuleComponent,
@@ -80,7 +81,9 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     ResetPasswordComponent,
     BoardSuperAdminComponent,
     AddUsersComponent,
-    AddAccessComponent
+    AddAccessComponent,
+    ErreurComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,
@@ -91,6 +94,7 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     NzProgressModule,
     NgZorroAntdModule,
     NzStepsModule,
+    NzResultModule,
     NzBadgeModule,
     FormsModule,
     NzAutocompleteModule,

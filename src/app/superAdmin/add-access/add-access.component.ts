@@ -100,10 +100,7 @@ validateForm: FormGroup;
     });
   }
   destroyTplModal(): void {
-if (this.tokenStorage.getToken()) {
 
-      this.isLoggedIn = true;
-      console.log('hneeeeee');
 
       this.userService.createUseraccess(this.user, this.sousmodu).subscribe(
         data => console.log(data),
@@ -117,7 +114,6 @@ if (this.tokenStorage.getToken()) {
         this.tplModalButtonLoading = false;
         this.tplModal.destroy();
       }, 1000);
-}
     }
      onSubmit() {
     this.submitted = true;

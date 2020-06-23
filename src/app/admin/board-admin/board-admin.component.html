@@ -17,44 +17,64 @@
             <div nz-row style="margin-bottom: 50px;">
                 <div nz-col [nzSpan]="18" [nzPush]="6" style="display: inline-block;">
                     <div nz-row nzType="flex" nzJustify="end">
-
                         <div nz-col [nzSpan]="4" style="padding-left: 1%;">
-                            <li nz-submenu nzTitle="Module" nzIcon="setting" routerLink="moduleadmin">
+                            <li nz-submenu nzTitle="Module" nzIcon="project" routerLink="moduleadmin">
                                 <span *ngFor="let access of useraccess">
                                     <span *ngIf="(access.user['id'] === this.id)"> 
                                     <span *ngFor="let sousmodule of sousModule">
                                         <span *ngIf="access.sousmodule['idSousModule'] === sousmodule.idSousModule">
-                                <ul >
-                                    <li nz-menu-group nzTitle="{{ sousmodule.module['nom']}}">
+                                            <li nz-menu-group nzTitle="{{ sousmodule.module['nom']}}">
 
-                                    </li>
-                                </ul>
+                                            </li>
+
+                              
                             </span>
                                 </span>
                                 </span>
                                 </span>
                             </li>
                         </div>
-                        <div nz-col [nzSpan]="4" style="padding-left: 1%;">
-                            <li nz-submenu nzTitle="Sous-Module" nzIcon="setting" routerLink="sousmoduleAdmin">
+                        <a nz-dropdown [nzDropdownMenu]="menu" style="color: black;" routerLink="sousmoduleAdmin">
+                            <i nz-icon nzIcon="fund" nzTheme="twotone">Hover me</i>
+
+                        </a>
+                        <nz-dropdown-menu #menu="nzDropdownMenu">
+                            <span *ngFor="let access of useraccess">
+                                <span *ngIf="(access.user['id'] === this.id)"> 
+                                <span *ngFor="let sousmodule of sousModule">
+                                    <span *ngIf="access.sousmodule['idSousModule'] === sousmodule.idSousModule">
+                            <ul nz-menu nzSelectable>
+                                <li nz-menu-item>
+                                    {{access.sousmodule['nomSousModule']}}
+                                </li>
+                                
+                            </ul>
+                            </span>
+                            </span>
+                            </span>
+                            </span>
+                        </nz-dropdown-menu>
+
+                        <!--   <div nz-col [nzSpan]="4" style="padding-left: 1%;">
+                            <li nz-submenu nzTitle="Sous-Module" nzIcon="fund" nzTheme="twotone" routerLink="sousmoduleAdmin">
                                 <span *ngFor="let access of useraccess">
                                     <span *ngIf="(access.user['id'] === this.id)"> 
                                     <span *ngFor="let sousmodule of sousModule">
                                         <span *ngIf="access.sousmodule['idSousModule'] === sousmodule.idSousModule">
-                                <ul>
-                                    <li nz-menu-group nzTitle="{{access.sousmodule['nomSousModule']}}">
+                                             <ul>
+                                                <li nz-menu-group nzTitle="{{access.sousmodule['nomSousModule']}}">
+                                               </li>
 
-                                    </li>
-
-                                </ul>
+                                             </ul>
                                 </span>
                                 </span>
                                 </span>
                                 </span>
                             </li>
-                        </div>
+                        </div> -->
                         <div nz-col [nzSpan]="4" style="padding-left: 1%;">
-                            <li nz-submenu nzTitle="Rapport" nzIcon="setting" routerLink="rapport">
+
+                            <li nz-submenu nzTitle="Rapport" nzIcon="pie-chart" routerLink="rapport">
                                 <span *ngFor="let access of useraccess">
                                     <span *ngIf="(access.user['id'] === this.id)"> 
                                     <span *ngFor="let sousmodule of sousModule">
@@ -252,23 +272,24 @@
     <nz-layout>
         <nz-sider nzWidth="200px" nzTheme="light" nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
             <ul nz-menu nzMode="inline" class="sider-menu">
-                <li nz-menu-item routerLink="home">
+                <li nz-menu-item>
                     <i nz-icon nzType="dashboard" nzTheme="outline"></i>
                     <span>Dashboard</span>
                 </li>
-                <span *ngFor="let access of useraccess">
-                <span *ngIf="(access.user['id'] === this.id)"> 
-                <span *ngFor="let sousmodule of sousModule">
-                    <span *ngIf="access.sousmodule['idSousModule'] === sousmodule.idSousModule">
-                <li nz-submenu  nzTitle="{{ sousmodule.module['nom']}}" nzIcon="appstore">                
-                    <ul>
-                       
-                        <li nz-submenu nzIcon="appstore-add" nzTitle="{{access.sousmodule['nomSousModule']}}">
-                            <ul *ngFor="let rapport of rapport">
-                                <span *ngIf="rapport.sousmodule['idSousModule'] == access.sousmodule['idSousModule']">
 
-                                <li nz-menu-item> {{rapport.nomRapport }}</li>
-                                </span>
+                <span *ngFor="let access of useraccess">
+                    <span *ngIf="(access.user['id'] === this.id)"> 
+                    <span *ngFor="let sousmodule of sousModule">
+                        <span *ngIf="access.sousmodule['idSousModule'] === sousmodule.idSousModule">
+                    <li nz-submenu  nzTitle="{{ sousmodule.module['nom']}}" nzIcon="appstore">                
+                        <ul>
+                           
+                            <li nz-submenu nzIcon="appstore-add" nzTitle="{{access.sousmodule['nomSousModule']}}">
+                                <ul *ngFor="let rapport of rapport">
+                                    <span *ngIf="rapport.sousmodule['idSousModule'] == access.sousmodule['idSousModule']">
+    
+                                    <li nz-menu-item> {{rapport.nomRapport }}</li>
+                                    </span>
             </ul>
             </li>
             </ul>
@@ -277,6 +298,8 @@
             </span>
             </span>
             </span>
+
+
             </ul>
         </nz-sider>
         <nz-layout class="inner-layout">

@@ -80,8 +80,9 @@ export class UserService {
     return this.http.get<Module>(API_URL + 'getAllModuls', httpOptions );
   }
 
+
   createModule(module): Observable<any> {
-    return this.http.post(API_URL + 'modul', module);
+    return this.http.post(`http://localhost:8080/api/test/modul`, module);
   }
 
   updateModule(module) {
@@ -103,7 +104,7 @@ createSousmodule(sousmodule, idModule: number): Observable<any> {
     return this.http.get(`${baseUrl}/getSousmodule/${idSousModule}`);
   }
 getSousmoduleList(): Observable<any> {
-  return this.http.get<SousModule>(API_URL + 'getAllSousmodule', httpOptions );
+  return this.http.get<SousModule>(API_URL + 'getAllSousmodule');
 }
 deletesousmodule(idSousModule: number): Observable<any> {
   return this.http.delete(`${API_URL}deleteSousmodule/${idSousModule}`, { responseType: 'text' });
@@ -123,8 +124,12 @@ createUseraccess(id: number, idSousModule: number ): Observable<any> {
 
 
 getAccessList(): Observable<any> {
-  return this.http.get<Useraccess>(API_URL + 'getAllAccess', httpOptions );
+  return this.http.get<Useraccess>(API_URL + 'getAllAccess');
 }
+getaccessByuserId(id): Observable<any> {
+  return this.http.get(`${baseUrl}/getaccessByuserId/${id}`);
+}
+
 
 // <!--Rapport-->
 createRapport(rapport, idSousModule): Observable<any> {
@@ -169,6 +174,8 @@ getAllXabscisse(): Observable<any> {
 getXabscisseId(idX): Observable<any> {
   return this.http.get(`${baseUrl}/getxabscisseId/${idX}`);
 }
+
+
 // <!--Yabscisse-->
 getAllYabscisse(): Observable<any> {
   return this.http.get<Yabscisse>(API_URL + 'getAllyabscisse', httpOptions );
@@ -176,4 +183,15 @@ getAllYabscisse(): Observable<any> {
 createYabscisse(yabscisse, idX: number): Observable<any> {
   return this.http.post(`http://localhost:8080/api/test/createYabscisse/${idX}`, yabscisse);
 }
+getXByRapport(idRapport): Observable<any> {
+  return this.http.get(`http://localhost:8080/api/test/getXByRapport/${idRapport}`, httpOptions );
+}
+getYByX(idX): Observable<any> {
+  return this.http.get(`http://localhost:8080/api/test/getYByX/${idX}`);
+}
+
+ getXForY(idX): Observable<any> {
+  return this.http.get(`http://localhost:8080/api/test/getXForY/${idX}`);
+}
+
 }

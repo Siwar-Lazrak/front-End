@@ -2,19 +2,15 @@ import { Component, OnInit, TemplateRef, Output, Input } from '@angular/core';
 import { SousModule } from '../Model/sousModule';
 import { Rapport } from '../Model/Rapport';
 import { TokenStorageService } from '../service/token-storage.service';
-import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from '../service/user.service';
-import { Observable } from 'rxjs';
 import { NzModalRef, NzModalService, NzPlacementType } from 'ng-zorro-antd';
 import { Module } from '../Model/Module';
-import { Tables } from '../Model/Tables';
 import { Useraccess } from '../Model/Useraccess';
-import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
-import { NzCascaderOption } from 'ng-zorro-antd/cascader';
 import { Xabscisse } from '../Model/Xabscisse';
-import { async } from 'rxjs/internal/scheduler/async';
-import { NzSelectModule } from 'ng-zorro-antd/select';
 import { Yabscisse } from '../Model/Yabscisse';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
+
 @Component({
   selector: 'app-rapport',
   templateUrl: './rapport.component.html',
@@ -23,16 +19,23 @@ import { Yabscisse } from '../Model/Yabscisse';
 export class RapportComponent implements OnInit {
   abs: Xabscisse[];
   absice: any;
+  idXxx: Promise<any>;
+  keys: string;
+  rObj: any[];
+  rObjX: any[];
+  rObjuser: any[];
  // tslint:disable-next-line:max-line-length
  constructor(private modalService: NzModalService, private userService: UserService, private tokenStorage: TokenStorageService) { }
-tableName: string;
+ tableName: string;
 i: string;
 raport: any;
  values: string[] | null = null;
  isVisible = false;
  tables: any;
  table: any[];
+ XForY: any [];
  columns: any[];
+ xbyrapport: any[];
  sousmodu: any;
  current = 0;
  index = 'First-content';
@@ -41,6 +44,7 @@ raport: any;
  submitted = false;
 useraccess: Useraccess[];
 id: any;
+idX: any;
 private roles: string[];
 username: string;
 module: Module[];
@@ -131,6 +135,7 @@ currentPageDataChange($event: Rapport[]): void {
     }, 3000);
   }
 
+
   handleCancell(): void {
     this.isVisible = false;
   }
@@ -146,9 +151,7 @@ ngOnInit(): void {
      this.username = user.username;
      this.id = user.id;
      console.log(this.id);
-   }
-  if (this.tokenStorage.getToken()) {
-       this.userService.getSousmoduleList().subscribe(
+     this.userService.getSousmoduleList().subscribe(
          (data: SousModule[]) => {
            this.sousModule = data;
          },
@@ -156,7 +159,7 @@ ngOnInit(): void {
            console.log('erreur');
          }
        );
-       this.userService.getAlltables().subscribe(
+     this.userService.getAlltables().subscribe(
         (data => {
           this.table = data;
         }),
@@ -164,7 +167,7 @@ ngOnInit(): void {
           console.log('erreur');
         }
       );
-       this.userService.getModuleList().subscribe(
+     this.userService.getModuleList().subscribe(
         (data: Module[]) => {
           this.module = data;
           console.log(data);
@@ -173,7 +176,7 @@ ngOnInit(): void {
           console.log('erreur');
         }
       );
-       this.userService.getAccessList().subscribe(
+     this.userService.getAccessList().subscribe(
        (data: Useraccess[]) => {
          this.useraccess = data;
          console.log(data);
@@ -183,7 +186,7 @@ ngOnInit(): void {
        }
      );
 
-       this.userService.getRapportList().subscribe(
+     this.userService.getRapportList().subscribe(
       (data: Rapport[]) => {
         this.rapport = data;
         console.log(data);
@@ -192,7 +195,7 @@ ngOnInit(): void {
         console.log('erreur');
       }
     );
-       this.userService.getAllXabscisse().subscribe(
+     this.userService.getAllXabscisse().subscribe(
       (data: Xabscisse[]) => {
         this.xabsicce = data;
         console.log(data);
@@ -201,7 +204,7 @@ ngOnInit(): void {
         console.log('erreur');
       }
     );
-       this.userService.getAllYabscisse().subscribe(
+     this.userService.getAllYabscisse().subscribe(
       (data: Yabscisse[]) => {
         this.yabsicce = data;
         console.log(data);
@@ -210,13 +213,18 @@ ngOnInit(): void {
         console.log('erreur');
       }
     );
-     }
+     this.userService.getaccessByuserId(this.id).subscribe(
+      (data) => {
+        this.rObjuser = data;
+        console.log('useraccs' + this.rObjuser);
+        console.log(data);
+      },
+      err => {
+        console.log('erreur');
+      }
+    );
    }
-
-
-
-
-
+  }
 
    getColumn(event) {
     if (this.tokenStorage.getToken()) {
@@ -232,17 +240,7 @@ ngOnInit(): void {
       );
    }
   }
-   createTplModal(tplTitle: TemplateRef<{}>, tplContent: TemplateRef<{}>, tplFooter: TemplateRef<{}>): void {
-     this.tplModal = this.modalService.create({
-       nzTitle: tplTitle,
-       nzContent: tplContent,
-       nzFooter: tplFooter,
-       nzMaskClosable: false,
-       nzClosable: false,
-       nzOnOk: () => console.log('Click ok')
-     });
-   }
-   myFnct = async () => {
+  myFnct = async () => {
     const promise = await this.userService.createRapport(this.rapports, this.sousmodu).toPromise();
     console.log('iciiiiii' + promise);
     this.raport = promise;
@@ -258,38 +256,64 @@ ngOnInit(): void {
     return promise2;
   }
 
-  destroyTplModal() {
-     if (this.tokenStorage.getToken()) {
-       this.isLoggedIn = true;
+   createTplModal(tplTitle: TemplateRef<{}>, tplContent: TemplateRef<{}>, tplFooter: TemplateRef<{}>): void {
+     this.tplModal = this.modalService.create({
+       nzTitle: tplTitle,
+       nzContent: tplContent,
+       nzFooter: tplFooter,
+       nzMaskClosable: false,
+       nzClosable: false,
+       nzOnOk: () => console.log('Click ok')
+     });
+   }
+   destroyTplModal() {
        this.tplModalButtonLoading = true;
        setTimeout(() => {
          this.tplModalButtonLoading = false;
          this.tplModal.destroy();
-       }, 1000);
-      }
+       }, 3000);
     }
-   async handleOkK() {
-      if (this.tokenStorage.getToken()) {
-        this.isLoggedIn = true;
-        this.userService.createYabscisse(this.yabscisse, await this.myFnct2()).subscribe(
-         (data: Yabscisse[]) => {
-           this.yabscisse = new Yabscisse();
-         },
-         err => {
-           console.log('erreur');
-         }
-       );
-        this.isConfirmLoading = true;
-        setTimeout(() => {
+
+    handleOkK = async () => {
+      const promise3 = await  this.userService.createYabscisse(this.yabscisse, await this.myFnct2()).toPromise();
+
+      this.isConfirmLoading = true;
+      setTimeout(() => {
         this.isVisible = false;
         this.isConfirmLoading = false;
-      }, 3000);
+      }, 1000);
+      await this.fun4();
+      await this.fun3();
+
+}
+fun4 = async () => {
+  this.userService.getXabscisseId(this.absice).subscribe(
+
+    // tslint:disable-next-line:ban-types
+    (data) => {
+      console.log(this.absice);
+      this.rObjX = data;
+      console.log('findX' + this.rObjX);
+
     }
+  );
+}
+
+fun3 = async () => {
+  this.userService.getYByX(this.absice).subscribe(
+
+    // tslint:disable-next-line:ban-types
+    (data) => {
+      console.log(this.absice);
+      this.rObj = data;
+      console.log('lababba' + this.rObj);
+
     }
+  );
+}
+
    onSubmit() {
      this.submitted = true;
-     this.destroyTplModal();
-     this.handleOkK();
    }
    deleterapport() {
 

@@ -30,30 +30,30 @@
                 <th nzWidth="60px"></th>
                 <th style="color: dodgerblue;">#</th>
                 <th style="color: dodgerblue;">Nom Sous Module
-                    <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
+                    <!--    <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
                         <i nz-icon nzType="search"></i>
-                    </nz-filter-trigger>
+                    </nz-filter-trigger> -->
                 </th>
                 <th style="color: dodgerblue;">Module</th>
+                <th style="color: dodgerblue;">Description</th>
                 <th style="color: dodgerblue;">Action</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody *ngFor="let access of useraccess">
             <ng-container *ngFor="let data of sousModule">
-                <tr>
-                    <td [nzExpand]="expandSet.has(data.idSousModule)" (nzExpandChange)="onExpandChange(data.idSousModule, $event)"></td>
+                <tr *ngIf="access.user['id'] === this.id && access.sousmodule['idSousModule'] === data.idSousModule">
+                    <td></td>
                     <td>{{ data.idSousModule}}</td>
                     <td>{{ data.nomSousModule}}</td>
                     <td>{{ data.module['nom'] }}</td>
+                    <td>{{ data.descriptionSousModule }}</td>
                     <td>
                         <a (click)="showModal()" (click)="editsousmodule(data)"> <i nz-icon nzType="edit" nzTheme="twotone"></i></a>
                         <nz-divider nzType="vertical"></nz-divider>
                         <a (click)="showConfirm()" (click)="deletesousmodule(data.idSousModule)"><i nz-icon nzType="delete" nzTheme="twotone"></i></a>
                     </td>
                 </tr>
-                <tr [nzExpand]="expandSet.has(data.idSousModule)">
-                    <span>{{ data.descriptionSousModule }}</span>
-                </tr>
+
             </ng-container>
         </tbody>
     </nz-table>

@@ -33,29 +33,27 @@
                     <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
                         <i nz-icon nzType="search"></i>
                     </nz-filter-trigger>
+
                 </th>
+                <th style="color: dodgerblue;">Description</th>
                 <th style="color: dodgerblue;">Action</th>
             </tr>
         </thead>
-        <tbody>
-            <ng-container *ngFor="let data of module">
-
-                <tr>
-                    <td [nzExpand]="expandSet.has(data.idModule)" (nzExpandChange)="onExpandChange(data.idModule, $event)"></td>
-                    <td>{{ data.idModule}}</td>
-                    <td>{{ data.nom}}</td>
+        <tbody *ngFor="let access of useraccess">
+            <ng-container *ngFor="let data of sousModule">
+                <tr *ngIf="access.user['id'] === this.id && access.sousmodule['idSousModule'] == data.idSousModule">
+                    <td></td>
+                    <td>{{ data.module['idModule']}}</td>
+                    <td>{{ data.module['nom']}}</td>
+                    <td>{{ data.module['description'] }}</td>
                     <td>
                         <a (click)="showModal()" (click)="editmodule(data)"> <i nz-icon nzType="edit" nzTheme="twotone"></i></a>
                         <nz-divider nzType="vertical"></nz-divider>
-                        <a (click)="showConfirm()" (click)="deleteModule(data.idModule)"><i nz-icon nzType="delete" nzTheme="twotone"></i></a>
+                        <a (click)="showConfirm()" (click)="deleteModule(data.module['idModule'])"><i nz-icon nzType="delete" nzTheme="twotone"></i></a>
                     </td>
                 </tr>
-
-
-                <tr [nzExpand]="expandSet.has(data.idModule)">
-                    <span>{{ data.description }}</span>
-                </tr>
             </ng-container>
+
         </tbody>
     </nz-table>
     <nz-pagination [nzPageIndex]="1" [nzTotal]="50" style="padding-left: 650px;"></nz-pagination>

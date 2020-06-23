@@ -8,7 +8,8 @@ import { Observable } from 'rxjs';
 import {  FormControl, FormGroup, Validators} from '@angular/forms';
 import { Useraccess } from '../../Model/Useraccess';
 import { SousModule } from '../../Model/SousModule';
-
+import { of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-module-admin',
@@ -25,7 +26,7 @@ private roles: string[];
  email: any;
 username: string;
 id: any;
-useraccess: Useraccess[];
+useraccess: any[];
 sousModule: SousModule[];
 countsousModule: any;
 visible = false;
@@ -80,55 +81,27 @@ handleCancel(): void {
 
 
 ngOnInit(): void {
-      this.isLoggedIn = !!this.tokenStorageService.getToken();
-      if (this.isLoggedIn) {
     const user = this.tokenStorageService.getUser();
-    this.roles = user.roles;
-    this.username = user.username;
-    this.email = user.email;
-    console.log(this.email);
     this.id = user.id;
     console.log(this.id);
-  }
-      if (this.tokenStorageService.getToken()) {
-    this.isLoggedIn = true;
+
     this.userService.getAccessList().subscribe(
-      (data: Useraccess[]) => {
+      (data) => {
         this.useraccess = data;
         console.log(data);
-      },
-      err => {
-        console.log('erreur');
-      }
-    );
-  }
-      if (this.tokenStorageService.getToken()) {
-          this.isLoggedIn = true;
-          this.userService.getSousmoduleList().subscribe(
-            (data: SousModule[]) => {
+      });
+
+    this.userService.getSousmoduleList().subscribe(
+            (data) => {
               this.sousModule = data;
               this.countsousModule = data.length;
-
-            },
-            err => {
-              console.log('siwar');
-            }
-          );
-      }
-
-      if (this.tokenStorageService.getToken()) {
-    this.isLoggedIn = true;
+            });
     this.userService.getModuleList().subscribe(
-  (data: Module[]) => {
+  (data) => {
     this.module = data;
     console.log(data);
-  },
-  err => {
-    console.log('erreur');
-  }
-);
+  });
 
-}
 }
 createTplModal(tplTitle: TemplateRef<{}>, tplContent: TemplateRef<{}>, tplFooter: TemplateRef<{}>): void {
   this.tplModal = this.modalService.create({

@@ -8,6 +8,7 @@ import { NzModalRef, NzModalService } from 'ng-zorro-antd';
 import { Module } from '../../Model/Module';
 import { Useraccess } from '../../Model/Useraccess';
 import { findIndex } from 'rxjs/operators';
+import { async } from '@angular/core/testing';
 @Component({
   selector: 'app-sousmod-admin',
   templateUrl: './sousmod-admin.component.html',
@@ -27,7 +28,7 @@ modulee: number;
     nom: '',
     description: '',
   };
-  soumodule: SousModule[];
+
   confirmModal: NzModalRef;
   tplModal: NzModalRef;
   tplModalButtonLoading = false;
@@ -41,13 +42,14 @@ showUserBoard = false;
  currentUser: any;
   // creation sousmodul
   sousmodul: SousModule = new SousModule();
-user: number;
-sousM: number;
-id: any;
+  user: number;
+  sousM: any;
+  id: any;
+  rObjuser: any[];
   modules: Array<Module> = [];
   selectedModule: Module = new Module();
-
   // lister
+  soumodule: any[];
   sousModule: SousModule[];
   module: Module[];
   isVisible = false;
@@ -72,7 +74,7 @@ reset(): void {
 
 search(): void {
   this.visible = false;
-  this.soumodule = this.soumodule.filter((item: SousModule) => item.nomSousModule.indexOf(this.searchValue) !== -1);
+  this.sousModule = this.sousModule.filter((item: SousModule) => item.nomSousModule.indexOf(this.searchValue) !== -1);
 }
   showModal(): void {
     this.isVisible = true;
@@ -89,30 +91,52 @@ search(): void {
     this.isVisible = false;
   }
   ngOnInit(): void {
-    if (this.tokenStorage.getToken()) {
-      this.isLoggedIn = true;
-      this.userService.getSousmoduleList().subscribe(
-        (data: SousModule[]) => {
+    this.isLoggedIn = !!this.tokenStorage.getToken();
+    if (this.isLoggedIn) {
+       const user = this.tokenStorage.getUser();
+       this.roles = user.roles;
+       this.id = user.id;
+       console.log(this.id);
+       this.userService.getSousmoduleList().subscribe(
+           (data: SousModule[]) => {
+             this.sousModule = data;
+           },
+           err => {
+             console.log('erreur');
+           }
+         );
+
+       this.userService.getModuleList().subscribe(
+          (data: Module[]) => {
+            this.module = data;
+            console.log(data);
+          },
+          err => {
+            console.log('erreur');
+          }
+        );
+       this.userService.getAccessList().subscribe(
+         (data: Useraccess[]) => {
+           this.useraccess = data;
+           console.log(data);
+         },
+         err => {
+           console.log('erreur');
+         }
+       );
+
+       this.userService.getaccessByuserId(this.id).subscribe(
+        (data) => {
+          this.rObjuser = data;
+          console.log('useraccs' + this.rObjuser);
           console.log(data);
-          this.sousModule = data;
-
         },
         err => {
           console.log('erreur');
         }
       );
-
-      this.userService.getModuleList().subscribe(
-        (data: Module[]) => {
-          this.module = data;
-        },
-        err => {
-          console.log('erreur');
-        }
-      );
+     }
     }
-
-  }
 
   createTplModal(tplTitle: TemplateRef<{}>, tplContent: TemplateRef<{}>, tplFooter: TemplateRef<{}>): void {
     this.tplModal = this.modalService.create({
@@ -124,40 +148,29 @@ search(): void {
       nzOnOk: () => console.log('Click ok')
     });
   }
+   myFnct = async () => {
+      const promise = await  this.userService.createSousmodule(this.sousmodul, this.modulee).toPromise();
+      console.log('adddddddddddd' + promise);
+      this.sousM = promise;
+      console.log('bndejdjejdje' + this.sousM)
+      return promise;
+  }
 
-  destroyTplModal(): void {
-    if (this.tokenStorage.getToken()) {
-         this.isLoggedIn = true;
-         this.roles = this.tokenStorage.getUser().roles;
-         this.id = this.tokenStorage.getUser().id;
-         console.log('id user ===' + this.id);
-
-         this.userService.createSousmodule(this.sousmodul, this.modulee).subscribe(
-        data => console.log(data),
-        error => console.log(error));
-
-         this.sousmodul = new SousModule();
-
-// console.log("id === "+this.modulee)
-         this.router.navigate(['sous-module']);
-
-/*partie n7eb n'insérit en mm temps fi useraccess
- if(this.showUserBoard = this.roles.includes('ROLE_USER')) {
-     this.userService.createUseraccess(this.id, this.sousM).subscribe(
-        data => console.log(data),
-        error => console.log(error));
-    }; */
-         this.tplModalButtonLoading = true;
-         setTimeout(() => {
+  destroyTplModal = async () => {
+   this.tplModalButtonLoading = true;
+   setTimeout(() => {
         this.tplModalButtonLoading = false;
         this.tplModal.destroy();
       }, 1000);
-    }
+   this.myFnct2();
   }
-
+  myFnct2 = async () => {
+    const promise2 = await this.userService.createUseraccess(this.id, await this.myFnct()).toPromise();
+    console.log('adddddddddddd' + promise2);
+    return promise2;
+}
   onSubmit() {
     this.submitted = true;
-    this.destroyTplModal();
   }
   deletesousmodule(idSousModule: number) {
     this.userService.deletesousmodule(idSousModule)
@@ -167,7 +180,6 @@ search(): void {
       },
       error => console.log(error));
   }
-
   showConfirm(): void {
     this.confirmModal = this.modalService.confirm({
       nzTitle: 'Do you Want to delete these sousmodule?',
@@ -178,7 +190,7 @@ search(): void {
           setTimeout(Math.random() > 0.5 ? resolve : reject, 1000);
         }).catch(() => console.log('Oops errors!')),
     });
-    this.router.navigate(['/sous-module']);
+    this.router.navigate(['/sousmoduleAdmin']);
   }
   editsousmodule(sousModule) {
     this.mysousmodule = sousModule;
